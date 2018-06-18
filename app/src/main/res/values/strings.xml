@@ -14,4 +14,14 @@
     <string name="usuario">USUARIO:</string>
     <string name="password">PASSWORD:</string>
     <string name="login">LOGIN</string>
+    <string name="nombre_cliente">Nombre:</string>
+    <string name="compartir">Compartir</string>
+    <string name="descripcion">Descripcion</string>
+    <string name="disponible">Disponible:</string>
+    <string name="precio">Precio:</string>
+    <string name="otros">Otros</string>
+    <string name="fotos">Fotos</string>
+    <string name="color">Color</string>
+    <string name="ficha">Ficha</string>
+    <string name="cantidad">N° Cant:</string>
 </resources>
