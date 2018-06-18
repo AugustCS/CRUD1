@@ -33,10 +33,12 @@
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:text="@string/ruc"
+                android:textColor="@color/colorBlack"
                 android:textAlignment="textEnd"
                 />
             <EditText
                 android:layout_width="250dp"
+                android:textColor="@color/colorBlack"
                 android:layout_height="wrap_content"
                 />
         </LinearLayout>
@@ -52,10 +54,12 @@
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:text="@string/usuario"
+                android:textColor="@color/colorBlack"
                 android:textAlignment="textEnd"
                 />
             <EditText
                 android:layout_width="250dp"
+                android:textColor="@color/colorBlack"
                 android:layout_height="wrap_content"
                 />
         </LinearLayout>
@@ -71,10 +75,12 @@
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:text="@string/password"
+                android:textColor="@color/colorBlack"
                 android:textAlignment="textEnd"
                 />
             <EditText
                 android:layout_width="250dp"
+                android:textColor="@color/colorBlack"
                 android:layout_height="wrap_content"
                 />
         </LinearLayout>
