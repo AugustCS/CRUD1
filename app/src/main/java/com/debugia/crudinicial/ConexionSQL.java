@@ -45,16 +45,18 @@ public class ConexionSQL {
 
 
     public ArrayList getListFamilia() {
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        ArrayList Familia = new ArrayList<String>();
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                .permitAll().build();
         StrictMode.setThreadPolicy(policy);
         Connection connection = null;
         String ConnectionURL = null;
-        ArrayList Familia = new ArrayList<String>();
-        try{
-            //
-            //           jdbc:jtds:sqlserver://IP_PUBLICA:1433/baseDatos;instance=INSTANCIA_SQL;user=usuario;password=contraseña;");/
-            Class.forName("net.sourceforge.jtds.jdbc.Driver");
-            ConnectionURL = "jdbc:jtds:sqlserver://192.168.1.111:1433/SQLSERVER2008R2;databaseName=Bd_Consultoria_2015;users=sa;password=Solu123456;";
+
+        try {
+            Class.forName(classs);
+            ConnectionURL = "jdbc:jtds:sqlserver://" + ip + ";"
+                    + "databaseName=" + db + ";user=" + un + ";password="
+                    + password + ";";
             connection = DriverManager.getConnection(ConnectionURL);
 
 
