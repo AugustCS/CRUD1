@@ -5,19 +5,16 @@
     android:layout_height="match_parent"
     tools:context="com.debugia.crudinicial.familia_item_descripcion">
 
-    <android.support.constraint.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
 
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="16dp"
-            android:orientation="vertical"
-            app:layout_constraintTop_toTopOf="parent">
-
+            android:orientation="vertical">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -127,14 +124,15 @@
                 </LinearLayout>
 
             </LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
-            android:layout_height="46dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent">
+            android:orientation="horizontal">
 
             <Button
                 android:layout_width="60dp"
@@ -175,5 +173,6 @@
                 android:layout_height="wrap_content"
                 android:drawableRight="@drawable/agregar_producto" />
         </LinearLayout>
-    </android.support.constraint.ConstraintLayout>
+
+    </ScrollView>
 </FrameLayout>
