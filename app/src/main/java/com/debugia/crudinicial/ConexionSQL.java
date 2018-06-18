@@ -15,7 +15,7 @@ import java.sql.*;
 
 public class ConexionSQL {
 
-    public static Connection ConnectionHelper() {
+    public  Connection ConnectionHelper() {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         Connection connection = null;

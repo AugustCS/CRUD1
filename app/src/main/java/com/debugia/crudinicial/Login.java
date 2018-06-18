@@ -48,10 +48,11 @@ public class Login extends Fragment implements View.OnClickListener {
         Fragment fragment;
         switch(v.getId()){
             case (R.id.b_ingresar):
-                if(conexionSQL.VerificarIngreso(et_ruc.getText().toString(),et_usuario.getText().toString(),et_clave.getText().toString())){
+                conexionSQL.ConnectionHelper();
+                //if(conexionSQL.VerificarIngreso(et_ruc.getText().toString(),et_usuario.getText().toString(),et_clave.getText().toString())){
                     fragment= new MenuPrincipal();
                     CambiarFragment(fragment);
-                }
+          //      }
                 break;
         }
     }
