@@ -25,6 +25,7 @@ public class ConexionSQL {
             Class.forName("net.sourceforge.jtds.jdbc.Driver");
             ConnectionURL = "jdbc:jtds:sqlserver://192.168.1.111;port=1433;databaseName=Bd_Consultoria_2015;users=sa;password=Solu123456;";
             connection = DriverManager.getConnection(ConnectionURL);
+            Log.d("ConnectionHelper","Conexion EXITOSA");
         } catch (SQLException se) {
             Log.e("ERROR", se.getMessage());
         } catch (ClassNotFoundException e) {
@@ -34,30 +35,4 @@ public class ConexionSQL {
         }
         return connection;
     }
-
-    /*public boolean ObtenerDatos() {
-        String datosConsultado = "";
-        try {
-            //Se obtiene la conexión
-            Connection connect = ConexionSQL.ConnectionHelper();
-            //Se genera la consulta
-            Statement st = connect.createStatement();
-            ResultSet rs = st.executeQuery("select campo1,campo2 from tabla");
-            while (rs.next()) {
-                //Se extraen los datos
-                datosConsultado = rs.getString("campo1");
-            }
-            //Se cierra la conexión
-            connect.close();
-            //Mostramos los datos obtenidos
-            Toast.makeText(getApplicationContext(),
-                    datosConsultado, Toast.LENGTH_SHORT).show();
-            return  true;
-        } catch (SQLException e) {
-            //Mostramos el error en caso de no conectarse
-            Toast.makeText(getApplicationContext(),
-                    e.getMessage().toString(), Toast.LENGTH_SHORT).show();
-            return false;
-        }
-    }*/
 }
