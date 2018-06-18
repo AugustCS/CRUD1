@@ -29,10 +29,10 @@ public class Login extends Fragment {
         return inflater.inflate(R.layout.fragment_login, container, false);
     }
 
-    public void CambiarFragment(Fragment fragment) {
+    public void CambiarFragment(Fragment fragment){
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        //fragmentTransaction.replace(R.id.M, fragment));
+        fragmentTransaction.replace(R.id.frag_contenedor, fragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
