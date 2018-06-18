@@ -1,153 +1,179 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.debugia.crudinicial.familia_item_descripcion">
 
-    <LinearLayout
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
+
 
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="15dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorBlack"
-                android:text="@string/nombre_cliente"/>
-            <TextView
-                android:id="@+id/nombre_familia"
-                android:paddingLeft="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="Nombre de Familia Obtenida"
-                />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="10dp">
+            android:layout_height="match_parent"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_gravity="center_vertical">
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/compartir"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorBlack"
-                    android:text="@string/compartir" />
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/ayudar"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorBlack"
-                    android:text="@string/descripcion" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginLeft="50dp"
+                android:orientation="horizontal"
                 android:padding="15dp">
 
-                <ImageView
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
-                    android:background="@color/colorBlack"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/nombre_cliente"
+                    android:textColor="@color/colorBlack" />
+
+                <TextView
+                    android:id="@+id/nombre_familia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Nombre de Familia Obtenida"
+                    android:paddingLeft="10dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingTop="5dp">
+                    android:layout_gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/compartir" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/colorBlack"
-                        android:text="@string/disponible"/>
-                    <TextView
-                        android:id="@+id/stock_disponible"
+                        android:text="@string/compartir"
+                        android:textColor="@color/colorBlack" />
+
+                    <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="10dp"
-                        android:hint="500 unidades"/>
+                        android:drawableLeft="@drawable/ayudar" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/descripcion"
+                        android:textColor="@color/colorBlack" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
+                    android:layout_marginLeft="50dp"
+                    android:orientation="vertical"
+                    android:padding="15dp">
+
+                    <ImageView
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:background="@color/colorBlack" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/colorBlack"
-                        android:text="@string/precio"/>
-                    <TextView
-                        android:id="@+id/precio_familia"
-                        android:layout_width="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingTop="5dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/disponible"
+                            android:textColor="@color/colorBlack" />
+
+                        <TextView
+                            android:id="@+id/stock_disponible"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:hint="500 unidades"
+                            android:paddingLeft="10dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="10dp"
-                        android:hint="S/. 50.00"/>
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/precio"
+                            android:textColor="@color/colorBlack" />
+
+                        <TextView
+                            android:id="@+id/precio_familia"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:hint="S/. 50.00"
+                            android:paddingLeft="10dp" />
+                    </LinearLayout>
+
                 </LinearLayout>
 
             </LinearLayout>
-
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="46dp"
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent">
+
             <Button
                 android:layout_width="60dp"
                 android:layout_height="wrap_content"
-                android:textSize="9sp"
-                android:text="@string/otros"/>
+                android:text="@string/otros"
+                android:textSize="9sp" />
+
             <Button
                 android:layout_width="60dp"
-                android:textSize="9sp"
                 android:layout_height="wrap_content"
-                android:text="@string/fotos"/>
+                android:text="@string/fotos"
+                android:textSize="9sp" />
+
             <Button
                 android:layout_width="60dp"
-                android:textSize="9sp"
                 android:layout_height="wrap_content"
-                android:text="@string/color"/>
+                android:text="@string/color"
+                android:textSize="9sp" />
+
             <Button
                 android:layout_width="60dp"
-                android:textSize="9sp"
                 android:layout_height="wrap_content"
-                android:text="@string/ficha"/>
+                android:text="@string/ficha"
+                android:textSize="9sp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorBlack"
-                android:text="@string/cantidad"/>
+                android:text="@string/cantidad"
+                android:textColor="@color/colorBlack" />
+
             <EditText
                 android:layout_width="50dp"
                 android:layout_height="wrap_content" />
+
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableRight="@drawable/agregar_producto"/>
+                android:drawableRight="@drawable/agregar_producto" />
         </LinearLayout>
-
-    </LinearLayout>
-
+    </android.support.constraint.ConstraintLayout>
 </FrameLayout>
