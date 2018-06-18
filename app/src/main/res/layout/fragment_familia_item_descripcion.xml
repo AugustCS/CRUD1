@@ -5,16 +5,23 @@
     android:layout_height="match_parent"
     tools:context="com.debugia.crudinicial.familia_item_descripcion">
 
-    <ScrollView
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fillViewport="true">
+        android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="2.7">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -50,6 +57,7 @@
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:background="transparent"
                         android:drawableLeft="@drawable/compartir" />
 
                     <TextView
@@ -61,6 +69,7 @@
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:background="transparent"
                         android:drawableLeft="@drawable/ayudar" />
 
                     <TextView
@@ -131,8 +140,8 @@
             android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_weight="0.3">
 
             <Button
                 android:layout_width="60dp"
@@ -174,5 +183,6 @@
                 android:drawableRight="@drawable/agregar_producto" />
         </LinearLayout>
 
-    </ScrollView>
+    </LinearLayout>
+</ScrollView>
 </FrameLayout>
