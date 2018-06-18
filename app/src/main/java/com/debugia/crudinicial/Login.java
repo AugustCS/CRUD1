@@ -43,14 +43,6 @@ public class Login extends Fragment implements View.OnClickListener {
 
     }
 
-    public void CambiarFragment(Fragment fragment){
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frag_contenedor, fragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
-    }
-
     @Override
     public void onClick(View v) {
         Fragment fragment;
@@ -62,5 +54,13 @@ public class Login extends Fragment implements View.OnClickListener {
                 }
                 break;
         }
+    }
+
+    public void CambiarFragment(Fragment fragment){
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frag_contenedor, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 }

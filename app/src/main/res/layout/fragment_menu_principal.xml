@@ -4,10 +4,33 @@
     android:layout_height="match_parent"
     tools:context="com.debugia.crudinicial.MenuPrincipal">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/b_familia"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Familia" />
+
+        <Button
+            android:id="@+id/b_sub_familia"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Sub Familia" />
+
+        <Button
+            android:id="@+id/b_concepto_n"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Concepto n" />
+
+    </LinearLayout>
 
 </FrameLayout>

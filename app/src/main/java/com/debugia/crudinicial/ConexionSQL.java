@@ -35,4 +35,32 @@ public class ConexionSQL {
         }
         return connection;
     }
+
+
+    public ArrayList getListFamilia() {
+        ArrayList Familia = new ArrayList<String>();
+        try{
+
+            Class.forName("net.sourceforge.jtds.jdbc.Driver");
+            Connection conn = DriverManager
+                    .getConnection(
+                            "192.168.1.111\\SQLSERVER2008R2\\Bd_Consultoria_2015",
+                            "sa", "Solu123456");
+
+            String stsql = "select * from Hfam_art";
+
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(stsql);
+            while(rs.next()){
+                Familia.add(rs.getString(2));
+            }
+            conn.close();
+            Log.d("getListFamilia","exito");
+
+        }catch (Exception e){
+            Log.d("getListFamilia",e.getMessage());
+        }
+        return Familia;
+    }
+
 }
