@@ -12,7 +12,7 @@ import android.view.ViewGroup;
  * A simple {@link Fragment} subclass.
  */
 public class familia_items extends Fragment {
-
+    ConexionSQL conexionSQL = new ConexionSQL();
 
     public familia_items() {
         // Required empty public constructor
