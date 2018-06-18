@@ -16,6 +16,7 @@ import android.widget.Button;
  */
 public class MenuPrincipal extends Fragment implements View.OnClickListener {
     Button b_familia;
+    ConexionSQL conexionSQL= new ConexionSQL();
 
     public MenuPrincipal() {
         // Required empty public constructor
@@ -37,7 +38,8 @@ public class MenuPrincipal extends Fragment implements View.OnClickListener {
         Fragment fragment;
         switch (v.getId()){
             case (R.id.b_familia):
-                fragment= new MenuPrincipal();
+                conexionSQL.getListFamilia();
+                fragment= new familia();
                 CambiarFragment(fragment);
                 break;
         }

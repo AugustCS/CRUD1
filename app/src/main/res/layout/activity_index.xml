@@ -22,9 +22,5 @@
         app:headerLayout="@layout/nav_header_index"
         app:menu="@menu/activity_index_drawer" />
 
-    <FrameLayout
-        android:id="@+id/frag_contenedor"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"></FrameLayout>
 
 </android.support.v4.widget.DrawerLayout>
