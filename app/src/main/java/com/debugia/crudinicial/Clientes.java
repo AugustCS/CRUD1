@@ -26,4 +26,20 @@ public class Clientes extends Fragment {
         return inflater.inflate(R.layout.fragment_clientes, container, false);
     }
 
+
+
+public void CambiarFragment(Fragment fragment){
+	FragmentManager fragmentManager = getFragmentManager();
+FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+fragmentTransaction.replace(R.id.fragment_container, fragment));
+fragmentTransaction.addToBackStack(null);
+fragmentTransaction.commit();
+
+
+
+
+
+
+}
+
 }
