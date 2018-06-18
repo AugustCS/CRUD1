@@ -15,6 +15,7 @@ public class ConexionSQL {
     //192.168.1.111:1433/SQLSERVER2008R2
 //    String ip = "192.168.1.111\\SQLSERVER2008R2:1433";
     String ip = "192.168.1.111:1433/SQLSERVER2008R2";
+    //String ip = "148.102.21.175:1433/SQLSERVER2008R2";
     String classs = "net.sourceforge.jtds.jdbc.Driver";
     String db = "Bd_Consultoria_2015";
     String un = "sa";
