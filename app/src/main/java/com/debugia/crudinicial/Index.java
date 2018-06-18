@@ -3,6 +3,9 @@ package com.debugia.crudinicial;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -40,6 +43,10 @@ public class Index extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+        Fragment fragment= new Login();
+        CambiarFragment(fragment);
     }
 
     @Override
@@ -93,5 +100,13 @@ public class Index extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+    public void CambiarFragment(Fragment fragment){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frag_contenedor, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 }
