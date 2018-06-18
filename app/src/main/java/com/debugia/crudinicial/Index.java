@@ -44,7 +44,8 @@ public class Index extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
+        drawer.setEnabled(false);
+        drawer.setVi
         Fragment fragment= new Login();
         CambiarFragment(fragment);
     }

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +20,7 @@ public class Login extends Fragment implements View.OnClickListener {
     Button b_ingresar;
     EditText et_ruc, et_usuario, et_clave;
     ConexionSQL conexionSQL = new ConexionSQL();
-
+    DrawerLayout drawer;
 
     public Login() {
         // Required empty public constructor
@@ -38,7 +39,7 @@ public class Login extends Fragment implements View.OnClickListener {
         et_ruc = view.findViewById(R.id.et_ruc);
         et_usuario = view.findViewById(R.id.et_usuario);
         et_clave = view.findViewById(R.id.et_clave);
-
+        drawer = getActivity().findViewById(R.id.drawer_layout);
         b_ingresar.setOnClickListener(this);
         return view;
 
@@ -49,11 +50,16 @@ public class Login extends Fragment implements View.OnClickListener {
         Fragment fragment;
         switch (v.getId()) {
             case (R.id.b_ingresar):
+                conexionSQL.getClaveEncriptada(et_clave.getText().toString());
                 if (conexionSQL.getLogin(et_ruc.getText().toString(), et_usuario.getText().toString(), et_clave.getText().toString())) {
+                    et_ruc.setText("");
+                    et_usuario.setText("");
+                    et_clave.setText("");
+                    drawer.setEnabled(true);
                     fragment = new MenuPrincipal();
                     CambiarFragment(fragment);
-                }else{
-                    Toast.makeText(getActivity(),"Error en las credenciales",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getActivity(), "Error en las credenciales", Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
