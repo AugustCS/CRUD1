@@ -3,7 +3,6 @@ package com.debugia.crudinicial;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -20,18 +19,14 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class sub_familia extends Fragment {
-    ConexionSQL conexionSQL = new ConexionSQL();
+public class Conceptos extends Fragment {
+
     ArrayList Familia = new ArrayList<String>();
     ArrayAdapter<String> arrayAdapter;
     EditText et_bucar;
-
-    private  String editing=null;
-
     ListView lv_items;
 
-
-    public sub_familia() {
+    public Conceptos() {
         // Required empty public constructor
     }
 
@@ -40,12 +35,11 @@ public class sub_familia extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
-        View view = inflater.inflate(R.layout.fragment_sub_familia, container, false);
+        View view = inflater.inflate(R.layout.fragment_conceptos, container, false);
         lv_items=view.findViewById(R.id.lv_items);
         et_bucar=view.findViewById(R.id.et_buscar);
 
-        Familia= SubFamiliaBD.getListSubFamilia("");
+        Familia= ConceptosBD.getListConcepto("");
         arrayAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1, Familia);
         lv_items.setAdapter(arrayAdapter);
 
@@ -66,22 +60,18 @@ public class sub_familia extends Fragment {
 
 
         return view;
-
     }
 
     private void getData(){
-        Familia= SubFamiliaBD.getListSubFamilia(et_bucar.getText().toString());
+        Familia= ConceptosBD.getListConcepto(et_bucar.getText().toString());
         arrayAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1, Familia);
         lv_items.setAdapter(arrayAdapter);
     }
 
     public void CambiarFragment(Fragment fragment){
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frag_contenedor, fragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.frag_contenedor, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
-
-
 }
