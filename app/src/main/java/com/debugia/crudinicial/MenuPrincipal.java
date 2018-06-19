@@ -3,14 +3,17 @@ package com.debugia.crudinicial;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
+
+import java.util.ArrayList;
 
 
 /**
@@ -18,7 +21,7 @@ import android.widget.Button;
  */
 public class MenuPrincipal extends Fragment implements View.OnClickListener {
     Button b_familia, b_sub_familia;
-
+    LinearLayout ly_menu;
     public MenuPrincipal() {
         // Required empty public constructor
     }
@@ -29,17 +32,34 @@ public class MenuPrincipal extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        View view=inflater.inflate(R.layout.fragment_menu_principal, container, false);
-        b_familia= view.findViewById(R.id.b_familia);
-        b_sub_familia= view.findViewById(R.id.b_sub_familia);
+        View view = inflater.inflate(R.layout.fragment_menu_principal, container, false);
+        b_familia = view.findViewById(R.id.b_familia);
+        b_sub_familia = view.findViewById(R.id.b_sub_familia);
+        ly_menu=view.findViewById(R.id.ly_menu);
+
         b_familia.setOnClickListener(this);
         b_sub_familia.setOnClickListener(this);
+
         try {
-            ((AppCompatActivity)getActivity()).getSupportActionBar().show();
+            ((AppCompatActivity) getActivity()).getSupportActionBar().show();
         } catch (Exception e) {
-            Log.d("getSupportActionBar",e.getMessage());
+            Log.d("getSupportActionBar", e.getMessage());
         }
-        return  view;
+        ArrayList arrayList=ConceptosBD.getListConceptos();
+        Integer conceptos = arrayList.size()/3;
+        // 123 123 123 123 123 123
+        int nombre=0;
+        for (int i=0; i<conceptos;i++){
+            Button btnTag = new Button(getContext());
+            btnTag.setLayoutParams( b_familia.getLayoutParams());
+            btnTag.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.polo));
+            btnTag.setGravity(b_familia.getGravity());
+            btnTag.setText(arrayList.get(1+nombre).toString());
+            btnTag.setId(i +1);
+            ly_menu.addView(btnTag);
+            nombre+=3;
+        }
+        return view;
     }
 
     @Override
@@ -58,11 +78,9 @@ public class MenuPrincipal extends Fragment implements View.OnClickListener {
     }
 
     public void CambiarFragment(Fragment fragment){
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out);
-        fragmentTransaction.replace(R.id.frag_contenedor, fragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.frag_contenedor, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 }

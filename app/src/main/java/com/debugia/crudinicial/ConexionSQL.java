@@ -34,7 +34,6 @@ public class ConexionSQL {
                     + "databaseName=" + db + ";user=" + un + ";password="
                     + password + ";";
             connection = DriverManager.getConnection(ConnectionURL);
-            Log.d("ConnectionHelper", "Conexion EXITOSA");
         } catch (SQLException se) {
             Log.e("ERROR SQLException", se.getMessage());
         } catch (ClassNotFoundException e) {

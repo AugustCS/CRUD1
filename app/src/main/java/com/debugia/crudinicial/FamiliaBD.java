@@ -11,31 +11,7 @@ import java.util.ArrayList;
 
 public class FamiliaBD {
 
-    public static ArrayList getListFamilia() {
-        ArrayList Familia = new ArrayList<String>();
-        Connection connection = null;
-
-        try {
-            connection=ConexionSQL.getConnection();
-            String stsql = "select * from Hfam_art where ccod_empresa=?";
-
-            PreparedStatement query = connection.prepareStatement(stsql);
-            query.setString(1, UsuarioBD.CodEmp);
-
-            ResultSet rs = query.executeQuery();
-
-            while (rs.next()) {
-                Familia.add(rs.getString("cnom_familia"));
-            }
-            connection.close();
-
-        } catch (Exception e) {
-            Log.d("getListFamilia", e.getMessage());
-        }
-        return Familia;
-    }
-
-    public static ArrayList getListFamiliaSearchView(String cnom_familia) {
+    public static ArrayList getListFamilia(String cnom_familia) {
         ArrayList Familia = new ArrayList<String>();
         Connection connection = null;
 

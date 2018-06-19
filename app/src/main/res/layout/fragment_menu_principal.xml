@@ -5,32 +5,35 @@
     tools:context="com.debugia.crudinicial.MenuPrincipal">
 
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/b_familia"
+        <LinearLayout
+            android:id="@+id/ly_menu"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Familia" />
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/b_sub_familia"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Sub Familia" />
+            <Button
+                android:id="@+id/b_familia"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_weight="1"
+                android:background="@drawable/polo"
+                android:gravity="bottom"
+                android:text="Familia" />
 
-        <Button
-            android:id="@+id/b_concepto_n"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Concepto n" />
-
-    </LinearLayout>
+            <Button
+                android:id="@+id/b_sub_familia"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_weight="1"
+                android:background="@drawable/polo"
+                android:gravity="bottom"
+                android:text="Sub Familia"
+                android:textAlignment="viewStart" />
+        </LinearLayout>
+    </ScrollView>
 
 </FrameLayout>

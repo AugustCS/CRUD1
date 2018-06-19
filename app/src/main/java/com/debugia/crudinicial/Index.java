@@ -2,14 +2,9 @@ package com.debugia.crudinicial;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -18,9 +13,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.Window;
-
-import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 public class Index extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -58,7 +50,6 @@ public class Index extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         int count = getSupportFragmentManager().getBackStackEntryCount();
 
-
         if (count == 1) {
             new AlertDialog.Builder(this)
                     .setTitle("Cerrar sesión")
@@ -73,7 +64,6 @@ public class Index extends AppCompatActivity
                     })
                     .create()
                     .show();
-            //additional code
         } else if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -124,11 +114,10 @@ public class Index extends AppCompatActivity
         return true;
     }
     public void CambiarFragment(Fragment fragment){
-        FragmentManager fragmentManager = getSupportFragmentManager();
-
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out);
-        fragmentTransaction.replace(R.id.frag_contenedor, fragment);
-        fragmentTransaction.commit();
+        getSupportFragmentManager()
+                .beginTransaction().
+                replace(R.id.frag_contenedor, fragment)
+                .setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out)
+                .commit();
     }
 }

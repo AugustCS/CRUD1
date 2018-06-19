@@ -45,7 +45,7 @@ public class sub_familia extends Fragment {
         lv_items=view.findViewById(R.id.lv_items);
         et_bucar=view.findViewById(R.id.et_buscar);
 
-        Familia= SubFamiliaBD.getListSubFamiliaSearchView("");
+        Familia= SubFamiliaBD.getListSubFamilia("");
         arrayAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1, Familia);
         lv_items.setAdapter(arrayAdapter);
 
@@ -70,7 +70,7 @@ public class sub_familia extends Fragment {
     }
 
     private void getData(){
-        Familia= SubFamiliaBD.getListSubFamiliaSearchView(et_bucar.getText().toString());
+        Familia= SubFamiliaBD.getListSubFamilia(et_bucar.getText().toString());
         arrayAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1, Familia);
         lv_items.setAdapter(arrayAdapter);
     }
