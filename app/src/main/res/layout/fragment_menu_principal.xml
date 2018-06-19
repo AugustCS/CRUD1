@@ -20,19 +20,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:layout_weight="1"
-                android:background="@drawable/polo"
+                android:background="@color/colorBlack"
                 android:gravity="bottom"
-                android:text="Familia" />
+                android:textColor="@color/colorWhite"
+                android:text="Familia"
+                android:layout_marginBottom="5dp"/>
 
             <Button
                 android:id="@+id/b_sub_familia"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:layout_weight="1"
-                android:background="@drawable/polo"
+                android:background="@color/colorBlack"
                 android:gravity="bottom"
                 android:text="Sub Familia"
-                android:textAlignment="viewStart" />
+                android:textColor="@color/colorWhite"
+                android:layout_marginBottom="5dp"
+                />
         </LinearLayout>
     </ScrollView>
 

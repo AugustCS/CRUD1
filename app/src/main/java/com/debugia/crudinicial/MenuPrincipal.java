@@ -52,8 +52,11 @@ public class MenuPrincipal extends Fragment implements View.OnClickListener {
         for (int i=0; i<conceptos;i++){
             Button btnTag = new Button(getContext());
             btnTag.setLayoutParams( b_familia.getLayoutParams());
-            btnTag.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.polo));
+
+            //btnTag.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.polo));
             btnTag.setGravity(b_familia.getGravity());
+            btnTag.setBackgroundColor(getResources().getColor(R.color.colorBlack));
+            btnTag.setTextColor(getResources().getColor(R.color.colorWhite));
             btnTag.setText(arrayList.get(1+nombre).toString());
             btnTag.setId(i +1);
             ly_menu.addView(btnTag);
