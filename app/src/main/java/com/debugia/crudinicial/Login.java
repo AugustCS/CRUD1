@@ -50,17 +50,20 @@ public class Login extends Fragment implements View.OnClickListener {
         Fragment fragment;
         switch (v.getId()) {
             case (R.id.b_ingresar):
-                conexionSQL.getClaveEncriptada(et_clave.getText().toString());
+                drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+                fragment = new MenuPrincipal();
+                CambiarFragment(fragment);
+                /*
                 if (conexionSQL.getLogin(et_ruc.getText().toString(), et_usuario.getText().toString(), et_clave.getText().toString())) {
                     et_ruc.setText("");
                     et_usuario.setText("");
                     et_clave.setText("");
-                    drawer.setEnabled(true);
+                    drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
                     fragment = new MenuPrincipal();
                     CambiarFragment(fragment);
                 } else {
                     Toast.makeText(getActivity(), "Error en las credenciales", Toast.LENGTH_SHORT).show();
-                }
+                }*/
                 break;
         }
     }
