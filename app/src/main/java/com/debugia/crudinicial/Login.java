@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,7 +43,9 @@ public class Login extends Fragment implements View.OnClickListener {
         drawer = getActivity().findViewById(R.id.drawer_layout);
         b_ingresar.setOnClickListener(this);
         drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-
+        et_ruc.setText("20600124782");
+        et_usuario.setText("admin");
+        et_clave.setText("12345678");
         return view;
 
     }
@@ -52,10 +55,6 @@ public class Login extends Fragment implements View.OnClickListener {
         Fragment fragment;
         switch (v.getId()) {
             case (R.id.b_ingresar):
-                drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
-                fragment = new MenuPrincipal();
-                CambiarFragment(fragment);
-                /*
                 if (conexionSQL.getLogin(et_ruc.getText().toString(), et_usuario.getText().toString(), et_clave.getText().toString())) {
                     et_ruc.setText("");
                     et_usuario.setText("");
@@ -65,7 +64,7 @@ public class Login extends Fragment implements View.OnClickListener {
                     CambiarFragment(fragment);
                 } else {
                     Toast.makeText(getActivity(), "Error en las credenciales", Toast.LENGTH_SHORT).show();
-                }*/
+                }
                 break;
         }
     }
@@ -73,8 +72,8 @@ public class Login extends Fragment implements View.OnClickListener {
     public void CambiarFragment(Fragment fragment) {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out);
         fragmentTransaction.replace(R.id.frag_contenedor, fragment);
-        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
 }

@@ -62,15 +62,17 @@ public class ConexionSQL {
             connection = DriverManager.getConnection(ConnectionURL);
 
 
-            String stsql = "select * from Hfam_art";
+            String stsql = "select * from Hfam_art where ccod_empresa=?";
 
-            Statement st = connection.createStatement();
-            ResultSet rs = st.executeQuery(stsql);
+            PreparedStatement query = connection.prepareStatement(stsql);
+            query.setString(1, InfoUsuario.CodEmp);
+
+            ResultSet rs = query.executeQuery();
+
             while (rs.next()) {
-                Familia.add(rs.getString(3));
+                Familia.add(rs.getString("cnom_familia"));
             }
             connection.close();
-            Log.d("getListFamilia", "exito");
 
         } catch (Exception e) {
             Log.d("getListFamilia", e.getMessage());
@@ -93,16 +95,18 @@ public class ConexionSQL {
                     + password + ";";
             connection = DriverManager.getConnection(ConnectionURL);
 
+            String stsql = "select * from Hfam_art where ccod_empresa=? and cnom_familia like ? ";
 
-            String stsql = "select * from Hfam_art where cnom_familia like '"+cnom_familia+"%'";
+            PreparedStatement query = connection.prepareStatement(stsql);
+            query.setString(1, InfoUsuario.CodEmp);
+            query.setString(2, cnom_familia+"%");
 
-            Statement st = connection.createStatement();
-            ResultSet rs = st.executeQuery(stsql);
+            ResultSet rs = query.executeQuery();
+
             while (rs.next()) {
-                Familia.add(rs.getString(3));
+                Familia.add(rs.getString("cnom_familia"));
             }
             connection.close();
-            Log.d("getListFamilia", "exito");
 
         } catch (Exception e) {
             Log.d("getListFamilia", e.getMessage());
@@ -126,16 +130,17 @@ public class ConexionSQL {
             connection = DriverManager.getConnection(ConnectionURL);
 
 
-            String stsql = "select * from Harticul";
+            String stsql = "select * from Hfam_art where ccod_empresa=? ";
 
-            Statement st = connection.createStatement();
-            ResultSet rs = st.executeQuery(stsql);
+            PreparedStatement query = connection.prepareStatement(stsql);
+            query.setString(1, InfoUsuario.CodEmp);
+
+            ResultSet rs = query.executeQuery();
+
             while (rs.next()) {
-                Familia.add(rs.getString("cnom_articulo"));
-                Familia.add(rs.getString("cnom_articulo"));
+                Familia.add(rs.getString("cnom_familia"));
             }
             connection.close();
-            Log.d("getListFamilia", "exito");
 
         } catch (Exception e) {
             Log.d("getListFamilia", e.getMessage());
@@ -164,19 +169,22 @@ public class ConexionSQL {
             query.setString(1, RUC);
             query.setString(2, Usuario);
             query.setString(3, ClaveEncriptada);
-            ;
 
             ResultSet rs = query.executeQuery();
             while (rs.next()) {
                 Familia.add(rs.getString(1));
+                Familia.add(rs.getString(2));
+                Familia.add(rs.getString(3));
+                Familia.add(rs.getString(4));
+                Familia.add(rs.getString(5));
+                Familia.add(rs.getString(7));
             }
+            InfoUsuario.GuardarUsuario(Familia);
             connection.close();
             if (Familia.size() > 0)
                 return true;
-            Log.d("getListFamilia", "exito");
-
         } catch (Exception e) {
-            Log.d("getListFamilia", e.getMessage());
+            Log.d("getLogin", e.getMessage());
         }
         return false;
     }
@@ -189,24 +197,13 @@ public class ConexionSQL {
             li_longitud = clave.length();
             for (int i = 0; i < li_longitud; i++) {
                 ls_letra = clave.substring(i, i+1);
-                Log.d("ls_letra", ls_letra);
-
                 li_ascii = ls_letra.codePointAt(0);
-                Log.d("li_ascii", li_ascii+"");
-
                 li_ascii_new = li_ascii + ((li_longitud + 1 - (i+1)) * (li_longitud + 1 - (i+1))) - ((li_longitud + 2 - (i+1)) * (li_longitud + 2 - (i+1)));
-                Log.d("li_ascii_new", li_ascii_new+"");
-
                 strexpresion = strexpresion + String.valueOf((char)li_ascii_new);
             }
         } catch (Exception e) {
             Log.d("getClaveEncriptada", "Fallo en algo: "+e.getMessage());
         }
-        Log.d("strexpresionFinal", "" + strexpresion);
         return strexpresion;
     }
-    //1234=&),/
-    // #&),/25
-    // le sale . :46
-    // me sale , :44
 }

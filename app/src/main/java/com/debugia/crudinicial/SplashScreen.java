@@ -26,7 +26,7 @@ public class SplashScreen extends Fragment {
             @Override
             public void run() {
                 try {
-                    sleep(3000);
+                    sleep(1000);
                     Fragment fragment = new Login();
                     CambiarFragment(fragment);
                 } catch (InterruptedException e) {
@@ -40,10 +40,10 @@ public class SplashScreen extends Fragment {
     }
 
     public void CambiarFragment(Fragment fragment){
-        FragmentManager fragmentManager = getFragmentManager();
 
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frag_contenedor, fragment);
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction()
+                .setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out)
+                .replace(R.id.frag_contenedor, fragment);
         fragmentTransaction.commit();
     }
 }
