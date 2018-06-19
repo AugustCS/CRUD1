@@ -43,7 +43,6 @@ public class Index extends AppCompatActivity
 
         drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
 
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         Fragment fragment= new SplashScreen();
         CambiarFragment(fragment);
