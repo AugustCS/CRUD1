@@ -12,22 +12,22 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class ConexionSQL {
-    //192.168.1.111:1433/SQLSERVER2008R2
-    //String ip = "192.168.1.111\\SQLSERVER2008R2:1433";
-    String ip = "192.168.1.111:1433/SQLSERVER2008R2";
-    //String ip = "148.102.21.175:1433/SQLSERVER2008R2";
-    String classs = "net.sourceforge.jtds.jdbc.Driver";
-    String db = "Bd_Consultoria_2015";
-    String un = "sa";
-    String password = "Solu123456";
 
-    public Connection ConnectionHelper() {
+
+    public static Connection getConnection() {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
                 .permitAll().build();
         StrictMode.setThreadPolicy(policy);
         Connection connection = null;
         String ConnectionURL = null;
-
+        //192.168.1.111:1433/SQLSERVER2008R2
+        //String ip = "192.168.1.111\\SQLSERVER2008R2:1433";
+        String ip = "192.168.1.111:1433/SQLSERVER2008R2";
+        //String ip = "148.102.21.175:1433/SQLSERVER2008R2";
+        String classs = "net.sourceforge.jtds.jdbc.Driver";
+        String db = "Bd_Consultoria_2015";
+        String un = "sa";
+        String password = "Solu123456";
         try {
             Class.forName(classs);
             ConnectionURL = "jdbc:jtds:sqlserver://" + ip + ";"
@@ -46,164 +46,4 @@ public class ConexionSQL {
     }
 
 
-    public ArrayList getListFamilia() {
-        ArrayList Familia = new ArrayList<String>();
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
-                .permitAll().build();
-        StrictMode.setThreadPolicy(policy);
-        Connection connection = null;
-        String ConnectionURL = null;
-
-        try {
-            Class.forName(classs);
-            ConnectionURL = "jdbc:jtds:sqlserver://" + ip + ";"
-                    + "databaseName=" + db + ";user=" + un + ";password="
-                    + password + ";";
-            connection = DriverManager.getConnection(ConnectionURL);
-
-
-            String stsql = "select * from Hfam_art where ccod_empresa=?";
-
-            PreparedStatement query = connection.prepareStatement(stsql);
-            query.setString(1, InfoUsuario.CodEmp);
-
-            ResultSet rs = query.executeQuery();
-
-            while (rs.next()) {
-                Familia.add(rs.getString("cnom_familia"));
-            }
-            connection.close();
-
-        } catch (Exception e) {
-            Log.d("getListFamilia", e.getMessage());
-        }
-        return Familia;
-    }
-
-    public ArrayList getListFamiliaSearchView(String cnom_familia) {
-        ArrayList Familia = new ArrayList<String>();
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
-                .permitAll().build();
-        StrictMode.setThreadPolicy(policy);
-        Connection connection = null;
-        String ConnectionURL = null;
-
-        try {
-            Class.forName(classs);
-            ConnectionURL = "jdbc:jtds:sqlserver://" + ip + ";"
-                    + "databaseName=" + db + ";user=" + un + ";password="
-                    + password + ";";
-            connection = DriverManager.getConnection(ConnectionURL);
-
-            String stsql = "select * from Hfam_art where ccod_empresa=? and cnom_familia like ? ";
-
-            PreparedStatement query = connection.prepareStatement(stsql);
-            query.setString(1, InfoUsuario.CodEmp);
-            query.setString(2, cnom_familia+"%");
-
-            ResultSet rs = query.executeQuery();
-
-            while (rs.next()) {
-                Familia.add(rs.getString("cnom_familia"));
-            }
-            connection.close();
-
-        } catch (Exception e) {
-            Log.d("getListFamilia", e.getMessage());
-        }
-        return Familia;
-    }
-
-    public ArrayList getListFamiliaProductos() {
-        ArrayList Familia = new ArrayList<String>();
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
-                .permitAll().build();
-        StrictMode.setThreadPolicy(policy);
-        Connection connection = null;
-        String ConnectionURL = null;
-
-        try {
-            Class.forName(classs);
-            ConnectionURL = "jdbc:jtds:sqlserver://" + ip + ";"
-                    + "databaseName=" + db + ";user=" + un + ";password="
-                    + password + ";";
-            connection = DriverManager.getConnection(ConnectionURL);
-
-
-            String stsql = "select * from Hfam_art where ccod_empresa=? ";
-
-            PreparedStatement query = connection.prepareStatement(stsql);
-            query.setString(1, InfoUsuario.CodEmp);
-
-            ResultSet rs = query.executeQuery();
-
-            while (rs.next()) {
-                Familia.add(rs.getString("cnom_familia"));
-            }
-            connection.close();
-
-        } catch (Exception e) {
-            Log.d("getListFamilia", e.getMessage());
-        }
-        return Familia;
-    }
-
-    public Boolean getLogin(String RUC, String Usuario, String Clave) {
-        ArrayList Familia = new ArrayList<String>();
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
-                .permitAll().build();
-        StrictMode.setThreadPolicy(policy);
-        Connection connection = null;
-        String ConnectionURL = null;
-        String ClaveEncriptada = null;
-        try {
-            ClaveEncriptada=getClaveEncriptada(Clave);
-            Class.forName(classs);
-            ConnectionURL = "jdbc:jtds:sqlserver://" + ip + ";"
-                    + "databaseName=" + db + ";user=" + un + ";password="
-                    + password + ";";
-            connection = DriverManager.getConnection(ConnectionURL);
-
-            String stsql = "select * from sv_list_user_login where ruc=? and coduser=? and pass=? and state='A'";
-            PreparedStatement query = connection.prepareStatement(stsql);
-            query.setString(1, RUC);
-            query.setString(2, Usuario);
-            query.setString(3, ClaveEncriptada);
-
-            ResultSet rs = query.executeQuery();
-            while (rs.next()) {
-                Familia.add(rs.getString(1));
-                Familia.add(rs.getString(2));
-                Familia.add(rs.getString(3));
-                Familia.add(rs.getString(4));
-                Familia.add(rs.getString(5));
-                Familia.add(rs.getString(7));
-            }
-            InfoUsuario.GuardarUsuario(Familia);
-            connection.close();
-            if (Familia.size() > 0)
-                return true;
-        } catch (Exception e) {
-            Log.d("getLogin", e.getMessage());
-        }
-        return false;
-    }
-
-    public String getClaveEncriptada(String clave) {
-        String strexpresion = "";
-        int li_longitud, li_ascii, li_ascii_new;
-        String ls_letra;
-        try {
-            li_longitud = clave.length();
-            for (int i = 0; i < li_longitud; i++) {
-                ls_letra = clave.substring(i, i+1);
-                li_ascii = ls_letra.codePointAt(0);
-                li_ascii_new = li_ascii + ((li_longitud + 1 - (i+1)) * (li_longitud + 1 - (i+1))) - ((li_longitud + 2 - (i+1)) * (li_longitud + 2 - (i+1)));
-                strexpresion = strexpresion + String.valueOf((char)li_ascii_new);
-            }
-        } catch (Exception e) {
-            Log.d("getClaveEncriptada", "Fallo en algo: "+e.getMessage());
-        }
-        return strexpresion;
-    }
 }

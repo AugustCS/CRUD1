@@ -55,7 +55,7 @@ public class Login extends Fragment implements View.OnClickListener {
         Fragment fragment;
         switch (v.getId()) {
             case (R.id.b_ingresar):
-                if (conexionSQL.getLogin(et_ruc.getText().toString(), et_usuario.getText().toString(), et_clave.getText().toString())) {
+                if (UsuarioBD.getLogin(et_ruc.getText().toString(), et_usuario.getText().toString(), et_clave.getText().toString())) {
                     et_ruc.setText("");
                     et_usuario.setText("");
                     et_clave.setText("");

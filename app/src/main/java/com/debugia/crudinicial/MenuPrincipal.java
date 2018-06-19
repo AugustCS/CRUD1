@@ -47,6 +47,7 @@ public class MenuPrincipal extends Fragment implements View.OnClickListener {
     public void CambiarFragment(Fragment fragment){
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out);
         fragmentTransaction.replace(R.id.frag_contenedor, fragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
