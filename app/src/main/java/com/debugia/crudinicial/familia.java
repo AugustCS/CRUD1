@@ -6,9 +6,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -20,14 +22,9 @@ import java.util.ArrayList;
  * A simple {@link Fragment} subclass.
  */
 public class familia extends Fragment {
-    ConexionSQL conexionSQL = new ConexionSQL();
     ArrayList Familia = new ArrayList<String>();
     ArrayAdapter<String> arrayAdapter;
     EditText et_bucar;
-
-
-    private  String editing=null;
-
     ListView lv_items;
 
     public familia() {
@@ -63,6 +60,17 @@ public class familia extends Fragment {
             }
         });
 
+        lv_items.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                FamiliaBD.cfamilia=FamiliaBD.myArray.get(position).get(1);
+                Fragment fragment;
+                fragment = new familia_items();
+                CambiarFragment(fragment);
+            }
+        });
+
 
         return view;
     }
@@ -76,7 +84,6 @@ public class familia extends Fragment {
 
     public void CambiarFragment(Fragment fragment){
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.setCustomAnimations(R.anim.fade_in,R.anim.fade_out,R.anim.fade_in,R.anim.fade_out);
         transaction.replace(R.id.frag_contenedor, fragment);
         transaction.addToBackStack(null);
         transaction.commit();

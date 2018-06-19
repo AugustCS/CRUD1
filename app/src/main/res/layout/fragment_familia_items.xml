@@ -4,10 +4,19 @@
     android:layout_height="match_parent"
     tools:context="com.debugia.crudinicial.familia_items">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <Button
+        android:id="@+id/button"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:text="Button" />
+
+    <LinearLayout
+        android:id="@+id/ly_contenedor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:verticalScrollbarPosition="right">
+
+    </LinearLayout>
 
 </FrameLayout>

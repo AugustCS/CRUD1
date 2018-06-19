@@ -47,7 +47,6 @@ public class MenuPrincipal extends Fragment implements View.OnClickListener {
         }
         ArrayList arrayList=ConceptosBD.getListConceptos();
         Integer conceptos = arrayList.size()/3;
-        // 123 123 123 123 123 123
         int nombre=0;
         for (int i=0; i<conceptos;i++){
             Button btnTag = new Button(getContext());
@@ -56,9 +55,11 @@ public class MenuPrincipal extends Fragment implements View.OnClickListener {
             btnTag.setGravity(b_familia.getGravity());
             btnTag.setText(arrayList.get(1+nombre).toString());
             btnTag.setId(i +1);
+            btnTag.setOnClickListener(this);
             ly_menu.addView(btnTag);
             nombre+=3;
         }
+
         return view;
     }
 
@@ -72,6 +73,41 @@ public class MenuPrincipal extends Fragment implements View.OnClickListener {
                 break;
             case (R.id.b_sub_familia):
                 fragment= new sub_familia();
+                CambiarFragment(fragment);
+                break;
+            case(1):
+                ConceptosBD.concepto=1;
+                fragment= new Conceptos();
+                CambiarFragment(fragment);
+                break;
+            case(2):
+                ConceptosBD.concepto=2;
+                fragment= new Conceptos();
+                CambiarFragment(fragment);
+                break;
+            case(3):
+                ConceptosBD.concepto=3;
+                fragment= new Conceptos();
+                CambiarFragment(fragment);
+                break;
+            case(4):
+                ConceptosBD.concepto=4;
+                fragment= new Conceptos();
+                CambiarFragment(fragment);
+                break;
+            case(5):
+                ConceptosBD.concepto=5;
+                fragment= new Conceptos();
+                CambiarFragment(fragment);
+                break;
+            case(6):
+                ConceptosBD.concepto=6;
+                fragment= new Conceptos();
+                CambiarFragment(fragment);
+                break;
+            case(7):
+                ConceptosBD.concepto=7;
+                fragment= new Conceptos();
                 CambiarFragment(fragment);
                 break;
         }
