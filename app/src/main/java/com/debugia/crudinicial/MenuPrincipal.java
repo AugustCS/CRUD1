@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +17,7 @@ import android.widget.Button;
  * A simple {@link Fragment} subclass.
  */
 public class MenuPrincipal extends Fragment implements View.OnClickListener {
-    Button b_familia;
+    Button b_familia, b_sub_familia;
 
     public MenuPrincipal() {
         // Required empty public constructor
@@ -29,7 +31,14 @@ public class MenuPrincipal extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_menu_principal, container, false);
         b_familia= view.findViewById(R.id.b_familia);
+        b_sub_familia= view.findViewById(R.id.b_sub_familia);
         b_familia.setOnClickListener(this);
+        b_sub_familia.setOnClickListener(this);
+        try {
+            ((AppCompatActivity)getActivity()).getSupportActionBar().show();
+        } catch (Exception e) {
+            Log.d("getSupportActionBar",e.getMessage());
+        }
         return  view;
     }
 
@@ -39,6 +48,10 @@ public class MenuPrincipal extends Fragment implements View.OnClickListener {
         switch (v.getId()){
             case (R.id.b_familia):
                 fragment= new familia();
+                CambiarFragment(fragment);
+                break;
+            case (R.id.b_sub_familia):
+                fragment= new sub_familia();
                 CambiarFragment(fragment);
                 break;
         }

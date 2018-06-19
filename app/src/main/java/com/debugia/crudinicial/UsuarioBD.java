@@ -61,4 +61,8 @@ public class UsuarioBD {
         }
         return strexpresion;
     }
+
+    public static void getExitLogin() {
+        CodEmp=null;
+    }
 }

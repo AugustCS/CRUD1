@@ -1,11 +1,13 @@
 package com.debugia.crudinicial;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -42,16 +44,37 @@ public class Index extends AppCompatActivity
 
 
         drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-
-
-        Fragment fragment= new SplashScreen();
+        try {
+            getSupportActionBar().hide();
+        } catch (Exception e) {
+            Log.d("getSupportActionBar",e.getMessage());
+        }
+        Fragment fragment = new SplashScreen();
         CambiarFragment(fragment);
     }
 
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
+        int count = getSupportFragmentManager().getBackStackEntryCount();
+
+
+        if (count == 1) {
+            new AlertDialog.Builder(this)
+                    .setTitle("Cerrar sesión")
+                    .setMessage("¿Esstá seguro de cerrar sesión?")
+                    .setNegativeButton(android.R.string.cancel, null) // dismisses by default
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            UsuarioBD.getExitLogin();
+                            Index.super.onBackPressed();
+                        }
+                    })
+                    .create()
+                    .show();
+            //additional code
+        } else if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
