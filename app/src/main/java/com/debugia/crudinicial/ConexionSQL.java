@@ -78,6 +78,38 @@ public class ConexionSQL {
         return Familia;
     }
 
+    public ArrayList getListFamiliaSearchView(String cnom_familia) {
+        ArrayList Familia = new ArrayList<String>();
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                .permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        Connection connection = null;
+        String ConnectionURL = null;
+
+        try {
+            Class.forName(classs);
+            ConnectionURL = "jdbc:jtds:sqlserver://" + ip + ";"
+                    + "databaseName=" + db + ";user=" + un + ";password="
+                    + password + ";";
+            connection = DriverManager.getConnection(ConnectionURL);
+
+
+            String stsql = "select * from Hfam_art where cnom_familia like '"+cnom_familia+"%'";
+
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(stsql);
+            while (rs.next()) {
+                Familia.add(rs.getString(3));
+            }
+            connection.close();
+            Log.d("getListFamilia", "exito");
+
+        } catch (Exception e) {
+            Log.d("getListFamilia", e.getMessage());
+        }
+        return Familia;
+    }
+
     public ArrayList getListFamiliaProductos() {
         ArrayList Familia = new ArrayList<String>();
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()

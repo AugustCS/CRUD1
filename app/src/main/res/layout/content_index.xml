@@ -8,8 +8,10 @@
     tools:context="com.debugia.crudinicial.Index"
     tools:showIn="@layout/app_bar_index">
 
+
     <FrameLayout
         android:id="@+id/frag_contenedor"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></FrameLayout>
+        android:layout_height="469dp"/>
+
 </android.support.constraint.ConstraintLayout>

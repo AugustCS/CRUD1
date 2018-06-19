@@ -41,6 +41,8 @@ public class Login extends Fragment implements View.OnClickListener {
         et_clave = view.findViewById(R.id.et_clave);
         drawer = getActivity().findViewById(R.id.drawer_layout);
         b_ingresar.setOnClickListener(this);
+        drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+
         return view;
 
     }
