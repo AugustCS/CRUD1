@@ -25,6 +25,22 @@ public class MenuPrincipal extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        /*
+        final Thread thread = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    sleep(3000);
+                    Fragment fragment = new login();
+                    replaceFragment(fragment);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                //super.run();
+            }
+        };
+        thread.start();
+         */
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_menu_principal, container, false);
         b_familia= view.findViewById(R.id.b_familia);
