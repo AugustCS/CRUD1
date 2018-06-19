@@ -68,12 +68,38 @@ public class FamiliaBD {
                         rs.getString(15)));
             }
             connection.close();
-            Log.d("getListFamilia", cfamilia);
-            Log.d("getListFamilia", "Funciona");
-            Log.d("getListFamilia", articulos+"");
 
         } catch (Exception e) {
-            Log.d("getListFamilia", e.getMessage());
+            Log.d("FamiliaArticulos", e.getMessage());
+        }
+        return articulos;
+    }
+    public static ArrayList<List<String>> getListFamiliaArticulosDescripción() {
+        ArrayList<List<String>> articulos = new ArrayList<>();
+        Connection connection = null;
+        try {
+            connection=ConexionSQL.getConnection();
+
+            String stsql = "select * from Harticul where ccod_empresa=? and cfamilia=?  ";
+
+            PreparedStatement query = connection.prepareStatement(stsql);
+            query.setString(1, UsuarioBD.CodEmp);
+            query.setString(2, cfamilia);
+
+            ResultSet rs = query.executeQuery();
+
+            while (rs.next()) {
+                articulos.add(Arrays.asList(
+                        rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(13),
+                        rs.getString(14),
+                        rs.getString(15)));
+            }
+            connection.close();
+
+        } catch (Exception e) {
+            Log.d("ArticulosDescripción", e.getMessage());
         }
         return articulos;
     }

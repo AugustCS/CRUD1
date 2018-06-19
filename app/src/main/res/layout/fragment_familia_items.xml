@@ -4,19 +4,25 @@
     android:layout_height="match_parent"
     tools:context="com.debugia.crudinicial.familia_items">
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Button" />
-
     <LinearLayout
-        android:id="@+id/ly_contenedor"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:verticalScrollbarPosition="right">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Filtro" />
+
+        <LinearLayout
+            android:id="@+id/ly_contenedor"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:verticalScrollbarPosition="right">
+
+        </LinearLayout>
     </LinearLayout>
 
 </FrameLayout>

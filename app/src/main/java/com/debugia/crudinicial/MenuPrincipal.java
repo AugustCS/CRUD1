@@ -61,7 +61,9 @@ public class MenuPrincipal extends Fragment implements View.OnClickListener {
             btnTag.setOnClickListener(this);
             ly_menu.addView(btnTag);
             nombre+=3;
+            b_familia.setPadding(btnTag.getPaddingLeft(),btnTag.getPaddingTop(),btnTag.getPaddingRight(),btnTag.getPaddingBottom());
         }
+
 
         return view;
     }

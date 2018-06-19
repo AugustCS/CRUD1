@@ -19,12 +19,12 @@
                 android:id="@+id/b_familia"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
+                android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:background="@color/colorBlack"
                 android:gravity="bottom"
-                android:textColor="@color/colorWhite"
                 android:text="Familia"
-                android:layout_marginBottom="5dp"/>
+                android:textColor="@color/colorWhite" />
 
             <Button
                 android:id="@+id/b_sub_familia"

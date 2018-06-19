@@ -5,26 +5,22 @@
     android:layout_height="match_parent"
     tools:context="com.debugia.crudinicial.familia_item_descripcion">
 
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="true">
-
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="2.7">
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="8"
                 android:orientation="horizontal"
                 android:padding="15dp">
 
@@ -44,7 +40,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:orientation="horizontal"
                 android:padding="10dp">
 
@@ -52,6 +49,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginBottom="100dp"
                     android:orientation="vertical">
 
                     <Button
@@ -139,50 +137,57 @@
         <LinearLayout
             android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_weight="0.3">
+            android:layout_height="match_parent"
+            android:layout_weight="7"
+            android:orientation="horizontal">
 
             <Button
-                android:layout_width="60dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="@string/otros"
                 android:textSize="9sp" />
 
             <Button
-                android:layout_width="60dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="@string/fotos"
                 android:textSize="9sp" />
 
             <Button
-                android:layout_width="60dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="@string/color"
                 android:textSize="9sp" />
 
             <Button
-                android:layout_width="60dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="@string/ficha"
                 android:textSize="9sp" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="@string/cantidad"
                 android:textColor="@color/colorBlack" />
 
             <EditText
-                android:layout_width="50dp"
-                android:layout_height="wrap_content" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
 
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:drawableRight="@drawable/agregar_producto" />
         </LinearLayout>
 
     </LinearLayout>
-</ScrollView>
+
 </FrameLayout>

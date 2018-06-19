@@ -4,6 +4,8 @@ package com.debugia.crudinicial;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -71,6 +73,17 @@ public class familia_items extends Fragment {
                 imageView.setImageResource(getResources().getIdentifier("polo", "drawable", activity.getPackageName()));
                 imageView.setLayoutParams(lpimage);
                 linearLayoutv.addView(imageView);
+                final int finalI = i;
+                imageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Fragment fragment;
+                        Log.d("Codigo",articulos.get(finalI).get(1));
+                        Log.d("Codigo",articulos.get(finalI).get(3));
+                        fragment = new familia_item_descripcion();
+                        CambiarFragment(fragment);
+                    }
+                });
 
 
                 TextView nombre=new TextView(activity);
@@ -79,16 +92,22 @@ public class familia_items extends Fragment {
                 linearLayoutv.addView(nombre);
 
                 TextView tamaño=new TextView(activity);
-                nombre.setText(articulos.get(i).get(3));
+                tamaño.setText(articulos.get(i).get(3));
                 tamaño.setGravity(Gravity.CENTER_HORIZONTAL);
                 linearLayoutv.addView(tamaño);
 
                 TextView precio=new TextView(activity);
-                nombre.setText(articulos.get(i).get(3));
+                precio.setText(articulos.get(i).get(4));
                 precio.setGravity(Gravity.CENTER_HORIZONTAL);
                 linearLayoutv.addView(precio);
             }
         }
 
+    }
+    public void CambiarFragment(Fragment fragment){
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.frag_contenedor, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 }
