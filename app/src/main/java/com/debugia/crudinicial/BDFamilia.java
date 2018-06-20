@@ -90,7 +90,9 @@ public class BDFamilia {
 
             while (rs.next()) {
                 articulos.add(Arrays.asList(
-                        rs.getString(1),
+                        rs.getString("cnom_articulo"),
+                        rs.getString("cunidad"),
+                        rs.getString("cmonedav"),
                         rs.getString(2),
                         rs.getString(13),
                         rs.getString(14),

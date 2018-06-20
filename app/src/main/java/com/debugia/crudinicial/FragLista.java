@@ -66,6 +66,7 @@ public class FragLista extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 CodigosGenerales.listArrayList=CodigosGenerales.getlistArrayList();
                 CodigosGenerales.SetCodigLisArticulos(CodigosGenerales.listArrayList.get(position).get(1));
+                CodigosGenerales.nom_categoria=CodigosGenerales.listArrayList.get(position).get(2);
                 Fragment fragment;
                 fragment = new FragListArticulos();
                 CambiarFragment(fragment);

@@ -9,6 +9,7 @@ public class CodigosGenerales {
     public static String Tipo = "";
     public static ArrayList<List<String>> listArrayList = new ArrayList<>();
     public static String Cod_Articulo = "";
+    public static String nom_categoria="";
 
     public static ArrayList getList(String Nombre) {
         try {
@@ -74,7 +75,7 @@ public class CodigosGenerales {
         return null;
     }
 
-    public static ArrayList<List<String>> getArticulosDescripcion(String Cod_Articulo) {
+    public static ArrayList<List<String>> getArticulosDescripcion() {
         try {
             switch (Tipo) {
                 case "Familia":
