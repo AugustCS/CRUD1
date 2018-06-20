@@ -20,6 +20,7 @@ public class FamiliaBD {
         Connection connection = null;
 
         try {
+            myArray.clear();
             connection=ConexionSQL.getConnection();
 
             String stsql = "select * from Hfam_art where ccod_empresa=? and cnom_familia like ? ";

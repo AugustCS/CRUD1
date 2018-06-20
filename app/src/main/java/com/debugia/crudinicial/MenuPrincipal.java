@@ -74,46 +74,55 @@ public class MenuPrincipal extends Fragment implements View.OnClickListener {
         Fragment fragment;
         switch (v.getId()){
             case (R.id.b_familia):
-                fragment= new familia();
+                CodigosGenerales.Tipo="Familia";
+                fragment= new Lista();
                 CambiarFragment(fragment);
                 break;
             case (R.id.b_sub_familia):
-                fragment= new sub_familia();
+                CodigosGenerales.Tipo="SubFamilia";
+                fragment= new Lista();
                 CambiarFragment(fragment);
                 break;
             case(1):
                 ConceptosBD.concepto=1;
-                fragment= new Conceptos();
+                CodigosGenerales.Tipo="Concepto";
+                fragment= new Lista();
                 CambiarFragment(fragment);
                 break;
             case(2):
                 ConceptosBD.concepto=2;
-                fragment= new Conceptos();
+                CodigosGenerales.Tipo="Concepto";
+                fragment= new Lista();
                 CambiarFragment(fragment);
                 break;
             case(3):
                 ConceptosBD.concepto=3;
-                fragment= new Conceptos();
+                CodigosGenerales.Tipo="Concepto";
+                fragment= new Lista();
                 CambiarFragment(fragment);
                 break;
             case(4):
                 ConceptosBD.concepto=4;
-                fragment= new Conceptos();
+                CodigosGenerales.Tipo="Concepto";
+                fragment= new Lista();
                 CambiarFragment(fragment);
                 break;
             case(5):
                 ConceptosBD.concepto=5;
-                fragment= new Conceptos();
+                CodigosGenerales.Tipo="Concepto";
+                fragment= new Lista();
                 CambiarFragment(fragment);
                 break;
             case(6):
                 ConceptosBD.concepto=6;
-                fragment= new Conceptos();
+                CodigosGenerales.Tipo="Concepto";
+                fragment= new Lista();
                 CambiarFragment(fragment);
                 break;
             case(7):
                 ConceptosBD.concepto=7;
-                fragment= new Conceptos();
+                CodigosGenerales.Tipo="Concepto";
+                fragment= new Lista();
                 CambiarFragment(fragment);
                 break;
         }

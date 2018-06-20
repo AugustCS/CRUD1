@@ -1,9 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.debugia.crudinicial.familia_item_descripcion">
+    tools:context=".ListaArticulosDesc">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -145,29 +145,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/otros"
-                android:textSize="9sp" />
+                android:text="@string/otros" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/fotos"
-                android:textSize="9sp" />
+                android:text="@string/fotos" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/color"
-                android:textSize="9sp" />
+                android:text="@string/color" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/ficha"
-                android:textSize="9sp" />
+                android:text="@string/ficha" />
 
             <TextView
                 android:layout_width="match_parent"
