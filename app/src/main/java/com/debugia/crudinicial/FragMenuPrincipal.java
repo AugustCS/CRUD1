@@ -41,6 +41,7 @@ public class FragMenuPrincipal extends Fragment implements View.OnClickListener 
         b_sub_familia.setOnClickListener(this);
 
         try {
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("");
             ((AppCompatActivity) getActivity()).getSupportActionBar().show();
             Log.d("Titulo", ((AppCompatActivity) getActivity()).getSupportActionBar().getTitle() + "");
         } catch (Exception e) {

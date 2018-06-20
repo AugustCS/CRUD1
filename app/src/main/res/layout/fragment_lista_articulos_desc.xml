@@ -85,9 +85,10 @@
                     android:padding="15dp">
 
                     <ImageView
+                        android:id="@+id/iv_imagen"
                         android:layout_width="200dp"
                         android:layout_height="200dp"
-                        android:background="@color/colorBlack" />
+                        android:background="@drawable/polo" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
