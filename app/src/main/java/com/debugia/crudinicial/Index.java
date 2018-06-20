@@ -96,17 +96,22 @@ public class Index extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+        Fragment fragment;
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
+        if (id == R.id.nav_catalogo) {
+            fragment= new Catalogo();
+            CambiarFragment(fragment);
+        } else if (id == R.id.nav_clientes) {
+            fragment= new Clientes();
+            CambiarFragment(fragment);
+        } else if (id == R.id.nav_pedidos) {
+            fragment= new Pedidos();
+            CambiarFragment(fragment);
+        } else if (id == R.id.nav_otros) {
+            fragment= new Otros();
+            CambiarFragment(fragment);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
