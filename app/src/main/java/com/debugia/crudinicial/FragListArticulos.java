@@ -22,12 +22,12 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ListaArticulos extends Fragment {
+public class FragListArticulos extends Fragment {
     Activity activity;
     LinearLayout layout_cointairner;
     ArrayList<List<String>> articulos = new ArrayList<>();
 
-    public ListaArticulos() {
+    public FragListArticulos() {
     }
 
     @Override
@@ -71,9 +71,10 @@ public class ListaArticulos extends Fragment {
                         @Override
                         public void onClick(View v) {
                             Fragment fragment;
+                            CodigosGenerales.Cod_Articulo=articulos.get(finalI).get(1);
                             Log.d("Codigo", articulos.get(finalI).get(1));
                             Log.d("Codigo", articulos.get(finalI).get(3));
-                            fragment = new ListaArticulosDesc();
+                            fragment = new FragListArtiDescripcion();
                             CambiarFragment(fragment);
                         }
                     });

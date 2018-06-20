@@ -8,16 +8,17 @@ import java.util.List;
 public class CodigosGenerales {
     public static String Tipo = "";
     public static ArrayList<List<String>> listArrayList = new ArrayList<>();
+    public static String Cod_Articulo = "";
 
     public static ArrayList getList(String Nombre) {
         try {
             switch (Tipo) {
                 case "Familia":
-                    return FamiliaBD.getListFamilia(Nombre);
+                    return BDFamilia.getListFamilia(Nombre);
                 case "SubFamilia":
-                    return SubFamiliaBD.getListSubFamilia(Nombre);
+                    return BDSubFamilia.getListSubFamilia(Nombre);
                 case "Concepto":
-                    return ConceptosBD.getListConcepto(Nombre);
+                    return BDConcepto.getListConcepto(Nombre);
             }
         } catch (Exception e) {
             Log.d("getList", e.getMessage());
@@ -29,11 +30,11 @@ public class CodigosGenerales {
         try {
             switch (Tipo) {
                 case "Familia":
-                    return FamiliaBD.myArray;
+                    return BDFamilia.myArray;
                 case "SubFamilia":
-                    return SubFamiliaBD.myArray;
+                    return BDSubFamilia.myArray;
                 case "Concepto":
-                    return ConceptosBD.myArray;
+                    return BDConcepto.myArray;
             }
         } catch (Exception e) {
             Log.d("getlistArrayList", e.getMessage());
@@ -45,11 +46,11 @@ public class CodigosGenerales {
         try {
             switch (Tipo) {
                 case "Familia":
-                    FamiliaBD.cfamilia = Codigo;
+                    BDFamilia.cfamilia = Codigo;
                 case "SubFamilia":
-                    SubFamiliaBD.cSubfamilia = Codigo;
+                    BDSubFamilia.cSubfamilia = Codigo;
                 case "Concepto":
-                    ConceptosBD.cConcepto = Codigo;
+                    BDConcepto.cConcepto = Codigo;
             }
         } catch (Exception e) {
             Log.d("SetCodigLisArticulos", e.getMessage());
@@ -61,14 +62,30 @@ public class CodigosGenerales {
         try {
             switch (Tipo) {
                 case "Familia":
-                    return FamiliaBD.getListFamiliaArticulos();
+                    return BDFamilia.getListFamiliaArticulos();
                 case "SubFamilia":
-                    return SubFamiliaBD.getListSubFamiliaArticulos();
+                    return BDSubFamilia.getListSubFamiliaArticulos();
                 case "Concepto":
-                    return ConceptosBD.getListConceptoArticulos();
+                    return BDConcepto.getListConceptoArticulos();
             }
         } catch (Exception e) {
             Log.d("getListArticulos", e.getMessage());
+        }
+        return null;
+    }
+
+    public static ArrayList<List<String>> getArticulosDescripcion(String Cod_Articulo) {
+        try {
+            switch (Tipo) {
+                case "Familia":
+                    return BDFamilia.getDescripcion(Cod_Articulo);
+                case "SubFamilia":
+                   return   BDSubFamilia.getDescripcion(Cod_Articulo);
+                case "Concepto":
+                    return BDConcepto.getDescripcion(Cod_Articulo);
+            }
+        } catch (Exception e) {
+            Log.d("SetCodigLisArticulos", e.getMessage());
         }
         return null;
     }

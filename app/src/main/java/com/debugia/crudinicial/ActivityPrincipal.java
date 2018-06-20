@@ -14,7 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class Index extends AppCompatActivity
+public class ActivityPrincipal extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
@@ -41,7 +41,7 @@ public class Index extends AppCompatActivity
         } catch (Exception e) {
             Log.d("getSupportActionBar",e.getMessage());
         }
-        Fragment fragment = new SplashScreen();
+        Fragment fragment = new FragSplashScreen();
         CambiarFragment(fragment);
     }
 
@@ -58,8 +58,8 @@ public class Index extends AppCompatActivity
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            UsuarioBD.getExitLogin();
-                            Index.super.onBackPressed();
+                            BDUsuario.getExitLogin();
+                            ActivityPrincipal.super.onBackPressed();
                         }
                     })
                     .create()

@@ -1,15 +1,13 @@
 package com.debugia.crudinicial;
 
-import android.os.StrictMode;
 import android.util.Log;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-public class UsuarioBD {
+public class BDUsuario {
     public static String CodEmp = "prueba";
 
     public static Boolean getLogin(String RUC, String Usuario, String Clave) {
@@ -18,7 +16,7 @@ public class UsuarioBD {
         String ClaveEncriptada = null;
         try {
             ClaveEncriptada=getClaveEncriptada(Clave);
-            connection=ConexionSQL.getConnection();
+            connection= BConexionSQL.getConnection();
             String stsql = "select * from sv_list_user_login where ruc=? and coduser=? and pass=? and state='A'";
             PreparedStatement query = connection.prepareStatement(stsql);
             query.setString(1, RUC);

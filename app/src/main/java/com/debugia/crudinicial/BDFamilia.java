@@ -1,17 +1,15 @@
 package com.debugia.crudinicial;
 
-import android.os.StrictMode;
 import android.util.Log;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class FamiliaBD {
+public class BDFamilia {
     public static String cfamilia;
     public static ArrayList<List<String>> myArray = new ArrayList<>();
 
@@ -21,12 +19,12 @@ public class FamiliaBD {
 
         try {
             myArray.clear();
-            connection=ConexionSQL.getConnection();
+            connection= BConexionSQL.getConnection();
 
             String stsql = "select * from Hfam_art where ccod_empresa=? and cnom_familia like ? ";
 
             PreparedStatement query = connection.prepareStatement(stsql);
-            query.setString(1, UsuarioBD.CodEmp);
+            query.setString(1, BDUsuario.CodEmp);
             query.setString(2, cnom_familia+"%");
 
             ResultSet rs = query.executeQuery();
@@ -50,12 +48,12 @@ public class FamiliaBD {
         ArrayList<List<String>> articulos = new ArrayList<>();
         Connection connection = null;
         try {
-            connection=ConexionSQL.getConnection();
+            connection= BConexionSQL.getConnection();
 
             String stsql = "select * from Harticul where ccod_empresa=? and cfamilia=?  ";
 
             PreparedStatement query = connection.prepareStatement(stsql);
-            query.setString(1, UsuarioBD.CodEmp);
+            query.setString(1, BDUsuario.CodEmp);
             query.setString(2, cfamilia);
 
             ResultSet rs = query.executeQuery();
@@ -75,17 +73,18 @@ public class FamiliaBD {
         }
         return articulos;
     }
-    public static ArrayList<List<String>> getListFamiliaArticulosDescripción() {
+    public static ArrayList<List<String>> getDescripcion(String Cod_Articulo) {
         ArrayList<List<String>> articulos = new ArrayList<>();
         Connection connection = null;
         try {
-            connection=ConexionSQL.getConnection();
+            connection= BConexionSQL.getConnection();
 
-            String stsql = "select * from Harticul where ccod_empresa=? and cfamilia=?  ";
+            String stsql = "select * from Harticul where ccod_empresa=? and cfamilia=? and ccod_articulo=? ";
 
             PreparedStatement query = connection.prepareStatement(stsql);
-            query.setString(1, UsuarioBD.CodEmp);
+            query.setString(1, BDUsuario.CodEmp);
             query.setString(2, cfamilia);
+            query.setString(3, Cod_Articulo);
 
             ResultSet rs = query.executeQuery();
 

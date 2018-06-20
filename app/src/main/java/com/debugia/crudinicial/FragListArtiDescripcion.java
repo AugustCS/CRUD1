@@ -11,10 +11,10 @@ import android.view.ViewGroup;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ListaArticulosDesc extends Fragment {
+public class FragListArtiDescripcion extends Fragment {
 
 
-    public ListaArticulosDesc() {
+    public FragListArtiDescripcion() {
         // Required empty public constructor
     }
 

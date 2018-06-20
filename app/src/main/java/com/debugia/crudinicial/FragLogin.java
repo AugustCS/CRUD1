@@ -12,13 +12,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
-public class Login extends Fragment implements View.OnClickListener {
+public class FragLogin extends Fragment implements View.OnClickListener {
     Button b_ingresar;
     EditText et_ruc, et_usuario, et_clave;
-    ConexionSQL conexionSQL = new ConexionSQL();
     DrawerLayout drawer;
 
-    public Login() {
+    public FragLogin() {
         // Required empty public constructor
     }
 
@@ -50,12 +49,12 @@ public class Login extends Fragment implements View.OnClickListener {
         Fragment fragment;
         switch (v.getId()) {
             case (R.id.b_ingresar):
-                if (UsuarioBD.getLogin(et_ruc.getText().toString(), et_usuario.getText().toString(), et_clave.getText().toString())) {
+                if (BDUsuario.getLogin(et_ruc.getText().toString(), et_usuario.getText().toString(), et_clave.getText().toString())) {
                     et_ruc.setText("");
                     et_usuario.setText("");
                     et_clave.setText("");
                     drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
-                    fragment = new MenuPrincipal();
+                    fragment = new FragMenuPrincipal();
                     CambiarFragment(fragment);
                 } else {
                     Toast.makeText(getActivity(), "Error en las credenciales", Toast.LENGTH_SHORT).show();

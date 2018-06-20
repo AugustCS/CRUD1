@@ -21,14 +21,14 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Lista extends Fragment {
+public class FragLista extends Fragment {
     ArrayList arrayList = new ArrayList<String>();
     ArrayAdapter<String> arrayAdapter;
     EditText et_bucar;
     ListView lv_items;
 
 
-    public Lista() {
+    public FragLista() {
         // Required empty public constructor
     }
 
@@ -67,7 +67,7 @@ public class Lista extends Fragment {
                 CodigosGenerales.listArrayList=CodigosGenerales.getlistArrayList();
                 CodigosGenerales.SetCodigLisArticulos(CodigosGenerales.listArrayList.get(position).get(1));
                 Fragment fragment;
-                fragment = new ListaArticulos();
+                fragment = new FragListArticulos();
                 CambiarFragment(fragment);
             }
         });

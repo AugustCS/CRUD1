@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 
 
 
-public class SplashScreen extends Fragment {
-    public SplashScreen() {
+public class FragSplashScreen extends Fragment {
+    public FragSplashScreen() {
         // Required empty public constructor
     }
 
@@ -27,7 +27,7 @@ public class SplashScreen extends Fragment {
             public void run() {
                 try {
                     sleep(1000);
-                    Fragment fragment = new Login();
+                    Fragment fragment = new FragLogin();
                     CambiarFragment(fragment);
                 } catch (InterruptedException e) {
                     e.printStackTrace();

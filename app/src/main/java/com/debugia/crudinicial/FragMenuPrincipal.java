@@ -4,7 +4,6 @@ package com.debugia.crudinicial;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,10 +18,10 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MenuPrincipal extends Fragment implements View.OnClickListener {
+public class FragMenuPrincipal extends Fragment implements View.OnClickListener {
     Button b_familia, b_sub_familia;
     LinearLayout ly_menu;
-    public MenuPrincipal() {
+    public FragMenuPrincipal() {
         // Required empty public constructor
     }
 
@@ -45,7 +44,7 @@ public class MenuPrincipal extends Fragment implements View.OnClickListener {
         } catch (Exception e) {
             Log.d("getSupportActionBar", e.getMessage());
         }
-        ArrayList arrayList=ConceptosBD.getListConceptos();
+        ArrayList arrayList= BDConcepto.getListConceptos();
         Integer conceptos = arrayList.size()/3;
         int nombre=0;
         for (int i=0; i<conceptos;i++){
@@ -75,54 +74,54 @@ public class MenuPrincipal extends Fragment implements View.OnClickListener {
         switch (v.getId()){
             case (R.id.b_familia):
                 CodigosGenerales.Tipo="Familia";
-                fragment= new Lista();
+                fragment= new FragLista();
                 CambiarFragment(fragment);
                 break;
             case (R.id.b_sub_familia):
                 CodigosGenerales.Tipo="SubFamilia";
-                fragment= new Lista();
+                fragment= new FragLista();
                 CambiarFragment(fragment);
                 break;
             case(1):
-                ConceptosBD.concepto=1;
+                BDConcepto.concepto=1;
                 CodigosGenerales.Tipo="Concepto";
-                fragment= new Lista();
+                fragment= new FragLista();
                 CambiarFragment(fragment);
                 break;
             case(2):
-                ConceptosBD.concepto=2;
+                BDConcepto.concepto=2;
                 CodigosGenerales.Tipo="Concepto";
-                fragment= new Lista();
+                fragment= new FragLista();
                 CambiarFragment(fragment);
                 break;
             case(3):
-                ConceptosBD.concepto=3;
+                BDConcepto.concepto=3;
                 CodigosGenerales.Tipo="Concepto";
-                fragment= new Lista();
+                fragment= new FragLista();
                 CambiarFragment(fragment);
                 break;
             case(4):
-                ConceptosBD.concepto=4;
+                BDConcepto.concepto=4;
                 CodigosGenerales.Tipo="Concepto";
-                fragment= new Lista();
+                fragment= new FragLista();
                 CambiarFragment(fragment);
                 break;
             case(5):
-                ConceptosBD.concepto=5;
+                BDConcepto.concepto=5;
                 CodigosGenerales.Tipo="Concepto";
-                fragment= new Lista();
+                fragment= new FragLista();
                 CambiarFragment(fragment);
                 break;
             case(6):
-                ConceptosBD.concepto=6;
+                BDConcepto.concepto=6;
                 CodigosGenerales.Tipo="Concepto";
-                fragment= new Lista();
+                fragment= new FragLista();
                 CambiarFragment(fragment);
                 break;
             case(7):
-                ConceptosBD.concepto=7;
+                BDConcepto.concepto=7;
                 CodigosGenerales.Tipo="Concepto";
-                fragment= new Lista();
+                fragment= new FragLista();
                 CambiarFragment(fragment);
                 break;
         }
