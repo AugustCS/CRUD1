@@ -88,7 +88,8 @@
                         android:id="@+id/iv_imagen"
                         android:layout_width="200dp"
                         android:layout_height="200dp"
-                        android:background="@drawable/polo" />
+                        android:background="@drawable/polo"
+                        android:scaleType="centerCrop" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
