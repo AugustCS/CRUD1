@@ -13,26 +13,29 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 
 public class ActivityPrincipal extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    DrawerLayout drawer;
+    ImageView iv_logo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_index);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle("");
 
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        iv_logo=findViewById(R.id.iv_logo);
+        drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView =  findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
 
@@ -42,13 +45,24 @@ public class ActivityPrincipal extends AppCompatActivity
         } catch (Exception e) {
             Log.d("getSupportActionBar",e.getMessage());
         }
+
+        try{
+            iv_logo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    drawer.openDrawer(GravityCompat.START);
+                }
+            });
+        }catch (Exception e){}
+
+
         Fragment fragment = new FragSplashScreen();
         CambiarFragment(fragment);
+
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         int count = getSupportFragmentManager().getBackStackEntryCount();
 
         if (count == 1) {
@@ -115,7 +129,6 @@ public class ActivityPrincipal extends AppCompatActivity
             CambiarFragment(fragment);
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

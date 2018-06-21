@@ -61,6 +61,7 @@
                         android:src="@drawable/compartir" />
 
                     <ImageButton
+                        android:id="@+id/ib_info"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:background="@color/colorWhite"
