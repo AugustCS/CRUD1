@@ -54,6 +54,7 @@
                     android:orientation="vertical">
 
                     <ImageButton
+                        android:id="@+id/b_share"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_marginBottom="10dp"

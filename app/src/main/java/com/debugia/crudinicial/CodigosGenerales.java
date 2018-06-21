@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CodigosGenerales {
+    public static Boolean Iniciar=true;
     public static String Tipo = "";
     public static ArrayList<List<String>> listArrayList = new ArrayList<>();
     public static String Cod_Articulo = "";
