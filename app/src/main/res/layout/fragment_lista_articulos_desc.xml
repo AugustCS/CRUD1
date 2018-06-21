@@ -42,6 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:gravity="center_horizontal"
                 android:orientation="horizontal"
                 android:padding="10dp">
 
@@ -55,14 +56,9 @@
                     <ImageButton
                         android:layout_width="50dp"
                         android:layout_height="50dp"
+                        android:layout_marginBottom="10dp"
                         android:background="@color/colorWhite"
                         android:src="@drawable/compartir" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/compartir"
-                        android:textColor="@color/colorBlack" />
 
                     <ImageButton
                         android:layout_width="50dp"
@@ -70,11 +66,6 @@
                         android:background="@color/colorWhite"
                         android:src="@drawable/ayudar" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/descripcion"
-                        android:textColor="@color/colorBlack" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -141,47 +132,54 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="7"
+            android:background="@color/colorBarra"
+            android:padding="5dp"
+            android:weightSum="6"
             android:orientation="horizontal">
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/otros" />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/fotos" />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/color" />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/ficha" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/cantidad"
-                android:textColor="@color/colorBlack" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
+            <ImageButton
+                android:layout_width="70dp"
+                android:layout_height="60dp"
+                android:background="@color/colorBarra"
+                android:scaleType="centerInside"
+                android:src="@drawable/lupa"
+                />
 
             <ImageButton
-                android:layout_width="match_parent"
+                android:layout_width="70dp"
                 android:layout_height="60dp"
+                android:background="@color/colorBarra"
+                android:scaleType="centerInside"
+                android:src="@drawable/fotos"
+                />
+
+            <ImageButton
+                android:layout_width="70dp"
+                android:layout_height="60dp"
+                android:background="@color/colorBarra"
+                android:scaleType="centerInside"
+                android:src="@drawable/color"
+                />
+
+            <ImageButton
+                android:layout_width="70dp"
+                android:layout_height="60dp"
+                android:background="@color/colorBarra"
+                android:scaleType="centerInside"
+                android:src="@drawable/ficha"
+                />
+
+            <EditText
+                android:layout_width="70dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:hint="@string/cantidad"
+                android:textSize="12sp"
+                android:textColorHint="@color/colorWhite"/>
+
+            <ImageButton
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_weight="1"
                 android:background="@color/colorWhite"
                 android:scaleType="centerInside"
