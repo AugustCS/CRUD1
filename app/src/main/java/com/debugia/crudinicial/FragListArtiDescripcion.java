@@ -33,35 +33,29 @@ public class FragListArtiDescripcion extends Fragment {
     Button b_cerrar_popup;
     View popupView;
     PopupWindow popupWindow;
+    Boolean popup_Abierto = false;
+
 
     LayoutInflater layoutInflater;
     ImageButton ib_info;
-    TextView et_nom_family,et_stock,et_precio;
+    TextView et_nom_family, et_stock, et_precio;
     ImageView iv_imagen;
-    /*
-      Button btn_Abrir_Popup;
-    Button btn_Cerrar;
-    LayoutInflater layoutInflater;
-    View popupView;
-    PopupWindow popupWindow;
 
-     */
+
     public FragListArtiDescripcion() {
-        // Required empty public constructor
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_lista_articulos_desc, container, false);
         listArrayList = CodigosGenerales.getArticulosDescripcion();
         et_nom_family = view.findViewById(R.id.et_nom_family);
         et_stock = view.findViewById(R.id.et_stock);
         et_precio = view.findViewById(R.id.et_precio);
         iv_imagen = view.findViewById(R.id.iv_imagen);
-        ib_info=view.findViewById(R.id.ib_info);
+        ib_info = view.findViewById(R.id.ib_info);
 
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.polo);
         RoundedBitmapDrawable mDrawable = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
@@ -83,7 +77,7 @@ public class FragListArtiDescripcion extends Fragment {
 
 
         try {
-            et_nom_family.setText(CodigosGenerales.nom_categoria+" - "+listArrayList.get(0).get(0));
+            et_nom_family.setText(CodigosGenerales.nom_categoria + " - " + listArrayList.get(0).get(0));
             et_stock.setText(listArrayList.get(0).get(1));
             et_precio.setText(listArrayList.get(0).get(2));
         } catch (Exception e) {
@@ -94,17 +88,30 @@ public class FragListArtiDescripcion extends Fragment {
         ib_info.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                layoutInflater= (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                popupView = layoutInflater.inflate(R.layout.popup_info, null);
-                popupWindow=new PopupWindow(popupView, RadioGroup.LayoutParams.WRAP_CONTENT,RadioGroup.LayoutParams.WRAP_CONTENT);
-                b_cerrar_popup=popupView.findViewById(R.id.id_cerrar);
-                b_cerrar_popup.setOnClickListener(new Button.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        popupWindow.dismiss();
+                if (!popup_Abierto) {
+                    layoutInflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                    popupView = layoutInflater.inflate(R.layout.popup_info, null);
+                    popupWindow = new PopupWindow(popupView, RadioGroup.LayoutParams.WRAP_CONTENT, RadioGroup.LayoutParams.WRAP_CONTENT);
+                    b_cerrar_popup = popupView.findViewById(R.id.id_cerrar);
+                    b_cerrar_popup.setOnClickListener(new Button.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            popupWindow.dismiss();
+                        }
+                    });
+                    popupWindow.showAsDropDown(ib_info, 50, 0);
+                    popup_Abierto=false;
+                } else {
+                    try {
+                        if (popupWindow != null)
+                            popupWindow.dismiss();
+                        else
+                            Log.d("ib_info", "popup null");
+                    } catch (Exception e) {
+                        Log.d("ib_info", e.getMessage());
                     }
-                });
-        popupWindow.showAsDropDown(ib_info,50,0);
+                    popup_Abierto=true;
+                }
             }
         });
 
