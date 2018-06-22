@@ -15,8 +15,8 @@ public class BDSubFamilia {
     public ArrayList<List<String>> arrayLista = new ArrayList<>();
     public ArrayList<List<String>> arrayArticulos = new ArrayList<>();
 
-    public ArrayList getListaNombres(String Nombre) {
-        ArrayList listaNombres = new ArrayList<String>();
+    public List<String>  getListaNombres(String Nombre) {
+        List<String>  listaNombres = new ArrayList<String>();
         Connection connection = null;
 
         try {

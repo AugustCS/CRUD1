@@ -13,10 +13,16 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ExpandableListView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.support.v7.widget.Toolbar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 
 /**
@@ -24,18 +30,20 @@ import java.util.ArrayList;
  */
 public class FragFiltros extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener {
 
+    ExpandableListAdapter listAdapter;
+    ExpListViewAdapterWithCheckbox listAdapterCheckbox;
+    ExpandableListView expListView;
+    List<String> listDataHeader;
+    HashMap<String, List<String>> listDataChild;
 
-    BDFamilia bdFamilia=new BDFamilia();
-    BDSubFamilia bdSubFamilia=new BDSubFamilia();
-    BDConcepto bdConcepto= new BDConcepto();
-
-
-    ArrayList arrayList = new ArrayList<String>();
-    ArrayAdapter<String> adapterFamilia, adapterSubFamilia;
-    ListView lv_familia, lv_subfamilia;
-    Toolbar toolbar_filtro, toolbar;
+    BDFamilia bdFamilia = new BDFamilia();
+    BDSubFamilia bdSubFamilia = new BDSubFamilia();
+    BDConcepto bdConcepto = new BDConcepto();
 
     Button b_borrar, b_listo;
+
+    Toolbar toolbar_filtro, toolbar;
+
 
     public FragFiltros() {
         // Required empty public constructor
@@ -45,79 +53,127 @@ public class FragFiltros extends Fragment implements View.OnClickListener, Adapt
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_filtros, container, false);
 
-        lv_familia = view.findViewById(R.id.lv_familia);
-        lv_subfamilia = view.findViewById(R.id.lv_subfamilia);
+        expListView = view.findViewById(R.id.lvExp);
 
-        toolbar_filtro = getActivity().findViewById(R.id.toolbar_filtro);
-        toolbar = getActivity().findViewById(R.id.toolbar);
-        b_borrar = getActivity().findViewById(R.id.b_borrar);
-        b_listo = getActivity().findViewById(R.id.b_listo);
+        prepareListData();
 
-        toolbar_filtro.setVisibility(View.VISIBLE);
-        toolbar.setVisibility(View.GONE);
+        listAdapter = new ExpandableListAdapter(getContext(), listDataHeader, listDataChild);
+        listAdapterCheckbox = new ExpListViewAdapterWithCheckbox(getContext(), listDataHeader, listDataChild);
 
-        try {
-            ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar_filtro);
-        } catch (Exception e) {
-            Log.d("getSupportActionBar", e.getMessage());
-        }
+        expListView.setAdapter(listAdapterCheckbox);
 
-        adapterFamilia = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_multiple_choice, bdFamilia.getListaNombres(""));
-        adapterSubFamilia = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_multiple_choice, bdSubFamilia.getListaNombres(""));
+        // Listview Group click listener
+        expListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
 
-        lv_familia.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-        lv_subfamilia.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+            @Override
+            public boolean onGroupClick(ExpandableListView parent, View v,
+                                        int groupPosition, long id) {
+                // Toast.makeText(getApplicationContext(),
+                // "Group Clicked " + listDataHeader.get(groupPosition),
+                // Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
 
-        lv_familia.setAdapter(adapterFamilia);
-        lv_subfamilia.setAdapter(adapterSubFamilia);
+        // Listview Group expanded listener
+        expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
 
-        lv_familia.setOnItemClickListener(this);
-        lv_subfamilia.setOnItemClickListener(this);
+            @Override
+            public void onGroupExpand(int groupPosition) {
+                Toast.makeText(getContext(),
+                        listDataHeader.get(groupPosition) + " Expanded",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
 
-        b_listo.setOnClickListener(this);
-        b_borrar.setOnClickListener(this);
+        // Listview Group collasped listener
+        expListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
+
+            @Override
+            public void onGroupCollapse(int groupPosition) {
+                Toast.makeText(getContext(),
+                        listDataHeader.get(groupPosition) + " Collapsed",
+                        Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+        // Listview on child click listener
+        expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v,
+                                        int groupPosition, int childPosition, long id) {
+                // TODO Auto-generated method stub
+                Toast.makeText(
+                        getContext(),
+                        listDataHeader.get(groupPosition)
+                                + " : "
+                                + listDataChild.get(
+                                listDataHeader.get(groupPosition)).get(
+                                childPosition), Toast.LENGTH_SHORT)
+                        .show();
+                return false;
+            }
+        });
         return view;
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case (R.id.b_listo):
-                ArrayList Fam_Selected=new ArrayList();
-                int len = lv_familia.getCount();
-                SparseBooleanArray checked = lv_familia.getCheckedItemPositions();
 
-                for (int i = 0; i < len; i++) {
-                    if (checked.get(i))
-                        Fam_Selected.add(i);
-                }
+    private void prepareListData() {
+        listDataHeader = new ArrayList<String>();
+        listDataChild = new HashMap<String, List<String>>();
 
-
-                break;
-            case (R.id.b_borrar):
-                try {
-                    lv_familia.clearChoices();
-                    lv_subfamilia.clearChoices();
-                    for (int i = 0; i < lv_familia.getCount(); i++) {
-                        lv_familia.setItemChecked(i, false);
-                    }
-                    for (int i = 0; i < lv_subfamilia.getCount(); i++) {
-                        lv_subfamilia.setItemChecked(i, false);
-                    }
-                } catch (Exception e) {
-                    Log.d("Error", e.getMessage());
-                }
-                break;
+        // Adding Header data
+        listDataHeader.add("Familia");
+        listDataHeader.add("Sub Familia");
+        ArrayList<List<String>> Conceptos = BDConcepto.getListaConceptos();
+        Integer conceptos = Conceptos.size();
+        for (int i = 0; i < conceptos; i++) {
+            listDataHeader.add(Conceptos.get(i).get(1));
         }
-    }
 
-    private void getData() {
-        arrayList = CodigosGenerales.getListFiltros();
-        //arrayAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1, arrayList);
-        //lv_items.setAdapter(arrayAdapter);
+        // Adding child data
+        List<String> list_familia = bdFamilia.getListaNombres("");
+        List<String> list_subFamilia = bdSubFamilia.getListaNombres("");
+
+        List<String> list_concepto1 = new ArrayList<>();
+        List<String> list_concepto2 = new ArrayList<>();
+        List<String> list_concepto3 = new ArrayList<>();
+        List<String> list_concepto4 = new ArrayList<>();
+        List<String> list_concepto5 = new ArrayList<>();
+        List<String> list_concepto6 = new ArrayList<>();
+        List<String> list_concepto7 = new ArrayList<>();
+        try {
+            CodigosGenerales.ConceptoElegido=1;
+            list_concepto1 = bdConcepto.getListaNombres("");
+            CodigosGenerales.ConceptoElegido=2;
+            list_concepto2 = bdConcepto.getListaNombres("");
+            CodigosGenerales.ConceptoElegido=3;
+            list_concepto3 = bdConcepto.getListaNombres("");
+            CodigosGenerales.ConceptoElegido=4;
+            list_concepto4 = bdConcepto.getListaNombres("");
+            CodigosGenerales.ConceptoElegido=5;
+            list_concepto5 = bdConcepto.getListaNombres("");
+            CodigosGenerales.ConceptoElegido=6;
+            list_concepto6 = bdConcepto.getListaNombres("");
+            CodigosGenerales.ConceptoElegido=7;
+            list_concepto7 = bdConcepto.getListaNombres("");
+        } catch (Exception e) {
+            Log.d("Concentps",e.getMessage());
+        }
+
+        listDataChild.put(listDataHeader.get(0), list_familia);
+        listDataChild.put(listDataHeader.get(1), list_subFamilia);
+        listDataChild.put(listDataHeader.get(2), list_concepto1);
+        listDataChild.put(listDataHeader.get(3), list_concepto2);
+        listDataChild.put(listDataHeader.get(4), list_concepto3);
+        listDataChild.put(listDataHeader.get(5), list_concepto4);
+        listDataChild.put(listDataHeader.get(6), list_concepto5);
+        listDataChild.put(listDataHeader.get(7), list_concepto6);
+        listDataChild.put(listDataHeader.get(28), list_concepto7);
     }
 
     public void CambiarFragment(Fragment fragment) {
@@ -128,13 +184,15 @@ public class FragFiltros extends Fragment implements View.OnClickListener, Adapt
     }
 
     @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+        }
+    }
+
+
+    @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         switch (view.getId()) {
-            case (R.id.lv_familia):
-                lv_familia.setItemChecked(2, true);
-                break;
-            case (R.id.lv_subfamilia):
-                break;
         }
     }
 
@@ -149,4 +207,5 @@ public class FragFiltros extends Fragment implements View.OnClickListener, Adapt
         }
         super.onDetach();
     }
+
 }

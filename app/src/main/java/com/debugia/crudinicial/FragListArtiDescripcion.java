@@ -41,8 +41,6 @@ public class FragListArtiDescripcion extends Fragment {
     Button b_cerrar_popup;
     View popupView;
     PopupWindow popupWindow;
-    Boolean popup_Abierto = false;
-    TextView tv_popup;
 
     LayoutInflater layoutInflater;
     ImageButton ib_info, b_share;
@@ -65,7 +63,6 @@ public class FragListArtiDescripcion extends Fragment {
         iv_imagen = view.findViewById(R.id.iv_imagen);
         ib_info = view.findViewById(R.id.ib_info);
         b_share = view.findViewById(R.id.b_share);
-        tv_popup = view.findViewById(R.id.tv_popup);
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.polo);
         RoundedBitmapDrawable mDrawable = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
         mDrawable.setCircular(true);

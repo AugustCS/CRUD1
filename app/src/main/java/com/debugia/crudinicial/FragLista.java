@@ -16,13 +16,14 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class FragLista extends Fragment {
-    ArrayList arrayList = new ArrayList<String>();
+    List arrayList = new ArrayList<String>();
     ArrayAdapter<String> arrayAdapter;
     EditText et_bucar;
     ListView lv_items;

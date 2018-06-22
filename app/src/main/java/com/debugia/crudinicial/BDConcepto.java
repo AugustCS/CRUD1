@@ -10,14 +10,12 @@ import java.util.Arrays;
 import java.util.List;
 
 public class BDConcepto {
-    public Integer concepto=CodigosGenerales.ConceptoElegido;
     public String cCodigo;
     public ArrayList<List<String>> arrayLista = new ArrayList<>();
     public ArrayList<List<String>> arrayArticulos = new ArrayList<>();
 
-
-    public static ArrayList getListConceptos() {
-        ArrayList arrayList = new ArrayList<String>();
+    public static ArrayList<List<String>> getListaConceptos() {
+        ArrayList<List<String>> Conceptos = new ArrayList<>();
         Connection connection = null;
 
         try {
@@ -31,20 +29,21 @@ public class BDConcepto {
             ResultSet rs = query.executeQuery();
 
             while (rs.next()) {
-                arrayList.add(rs.getString(1));
-                arrayList.add(rs.getString(2));
-                arrayList.add(rs.getString(3));
+                Conceptos.add(Arrays.asList(
+                        rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3)));
             }
             connection.close();
 
         } catch (Exception e) {
             Log.d("getListConceptos", e.getMessage());
         }
-        return arrayList;
+        return Conceptos;
     }
 
-    public ArrayList getListaNombres(String Nombre) {
-        ArrayList listaNombres = new ArrayList<String>();
+    public List<String>  getListaNombres(String Nombre) {
+        List<String>  listaNombres = new ArrayList<String>();
         Connection connection = null;
         Integer concepto=CodigosGenerales.ConceptoElegido;
         try {
@@ -78,6 +77,7 @@ public class BDConcepto {
 
         Connection connection = null;
         try {
+            Integer concepto=CodigosGenerales.ConceptoElegido;
             arrayArticulos.clear();
             connection= BConexionSQL.getConnection();
 
@@ -133,6 +133,7 @@ public class BDConcepto {
         Connection connection = null;
         try {
             connection= BConexionSQL.getConnection();
+            Integer concepto=CodigosGenerales.ConceptoElegido;
 
             String stsql=null;
             switch (concepto){

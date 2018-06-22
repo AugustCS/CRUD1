@@ -22,7 +22,7 @@ public class CodigosGenerales {
     public static BDSubFamilia bdSubFamilia=new BDSubFamilia();
     public static BDConcepto bdConcepto= new BDConcepto();
 
-    public static ArrayList getListaNombres(String Nombre) {
+    public static List getListaNombres(String Nombre) {
         try {
             switch (Tipo) {
                 case "Familia":

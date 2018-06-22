@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -50,9 +51,11 @@ public class FragMenuPrincipal extends Fragment implements View.OnClickListener 
         } catch (Exception e) {
             Log.d("getSupportActionBar", e.getMessage());
         }
-        ArrayList arrayList = BDConcepto.getListConceptos();
-        Integer conceptos = arrayList.size() / 3;
-        int nombre = 0;
+
+        //Crear Botones de conceptos
+
+        ArrayList<List<String>> Conceptos =  BDConcepto.getListaConceptos();
+        Integer conceptos = Conceptos.size();
         for (int i = 0; i < conceptos; i++) {
             Button btnTag = new Button(getContext());
             btnTag.setLayoutParams(b_familia.getLayoutParams());
@@ -61,11 +64,10 @@ public class FragMenuPrincipal extends Fragment implements View.OnClickListener 
             btnTag.setGravity(b_familia.getGravity());
             btnTag.setBackgroundColor(getResources().getColor(R.color.colorBlack));
             btnTag.setTextColor(getResources().getColor(R.color.colorWhite));
-            btnTag.setText(arrayList.get(1 + nombre).toString());
+            btnTag.setText(Conceptos.get(i).get(1).toString());
             btnTag.setId(i + 1);
             btnTag.setOnClickListener(this);
             ly_menu.addView(btnTag);
-            nombre += 3;
             b_familia.setPadding(btnTag.getPaddingLeft(), btnTag.getPaddingTop(), btnTag.getPaddingRight(), btnTag.getPaddingBottom());
             b_sub_familia.setPadding(btnTag.getPaddingLeft(), btnTag.getPaddingTop(), btnTag.getPaddingRight(), btnTag.getPaddingBottom());
         }
