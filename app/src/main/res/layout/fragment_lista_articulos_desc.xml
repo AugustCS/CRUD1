@@ -159,8 +159,7 @@
                 android:layout_height="60dp"
                 android:background="@color/colorBarra"
                 android:scaleType="centerInside"
-                android:src="@drawable/color"
-                />
+                android:src="@drawable/color" />
 
             <ImageButton
                 android:layout_width="70dp"
@@ -180,7 +179,7 @@
 
             <ImageButton
                 android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_height="60dp"
                 android:layout_weight="1"
                 android:background="@color/colorBarra"
                 android:scaleType="centerInside"
