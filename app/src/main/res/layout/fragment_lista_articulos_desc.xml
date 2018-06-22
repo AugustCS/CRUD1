@@ -167,7 +167,7 @@
                 android:layout_height="60dp"
                 android:background="@color/colorBarra"
                 android:scaleType="centerInside"
-                android:src="@drawable/ficha"
+                android:src="@drawable/doc_color"
                 />
 
             <EditText
@@ -182,9 +182,9 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_weight="1"
-                android:background="@color/colorWhite"
+                android:background="@color/colorBarra"
                 android:scaleType="centerInside"
-                android:src="@drawable/agregar_producto"/>
+                android:src="@drawable/car_color"/>
         </LinearLayout>
 
     </LinearLayout>
