@@ -192,7 +192,7 @@
                 android:padding="15dp"
                 android:background="@color/colorBarra"
                 android:scaleType="centerInside"
-                android:src="@drawable/car_color"/>
+                android:src="@drawable/carrito_plus"/>
         </LinearLayout>
 
     </LinearLayout>
