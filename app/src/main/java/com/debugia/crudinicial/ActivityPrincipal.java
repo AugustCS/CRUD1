@@ -1,8 +1,10 @@
 package com.debugia.crudinicial;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.support.design.widget.NavigationView;
@@ -15,11 +17,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 
 public class ActivityPrincipal extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     DrawerLayout drawer;
     ImageView iv_logo;
+    PopupWindow popupWindow;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,14 +33,14 @@ public class ActivityPrincipal extends AppCompatActivity
         setSupportActionBar(toolbar);
         toolbar.setTitle("");
 
-        iv_logo=findViewById(R.id.iv_logo);
+        iv_logo = findViewById(R.id.iv_logo);
         drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView =  findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
 
@@ -43,22 +48,24 @@ public class ActivityPrincipal extends AppCompatActivity
         try {
             getSupportActionBar().hide();
         } catch (Exception e) {
-            Log.d("getSupportActionBar",e.getMessage());
+            Log.d("getSupportActionBar", e.getMessage());
         }
 
-        try{
+        try {
             iv_logo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     drawer.openDrawer(GravityCompat.START);
                 }
             });
-        }catch (Exception e){}
+        } catch (Exception e) {
+        }
 
-
-        Fragment fragment = new FragSplashScreen();
-        CambiarFragment(fragment);
-
+        if (CodigosGenerales.Iniciar) {
+            CodigosGenerales.Iniciar = false;
+            Fragment fragment = new FragSplashScreen();
+            CambiarFragment(fragment);
+        }
     }
 
     @Override
@@ -74,6 +81,7 @@ public class ActivityPrincipal extends AppCompatActivity
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             BDUsuario.getExitLogin();
+                            CodigosGenerales.Iniciar = true;
                             ActivityPrincipal.super.onBackPressed();
                         }
                     })
@@ -89,7 +97,7 @@ public class ActivityPrincipal extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.index, menu);
+        getMenuInflater().inflate(R.menu.share_menu, menu);
         return true;
     }
 
@@ -101,8 +109,13 @@ public class ActivityPrincipal extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.menu_item_share) {
+            Log.d("Accion","cambiar fragment");
+
             return true;
+
+
+
         }
 
         return super.onOptionsItemSelected(item);
@@ -116,27 +129,37 @@ public class ActivityPrincipal extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_catalogo) {
-            fragment= new Catalogo();
-            CambiarFragment(fragment);
+            fragment = new Catalogo();
+            CambiarFragmentDrawer(fragment);
         } else if (id == R.id.nav_clientes) {
-            fragment= new Clientes();
-            CambiarFragment(fragment);
+            fragment = new Clientes();
+            CambiarFragmentDrawer(fragment);
         } else if (id == R.id.nav_pedidos) {
-            fragment= new Pedidos();
-            CambiarFragment(fragment);
+            fragment = new Pedidos();
+            CambiarFragmentDrawer(fragment);
         } else if (id == R.id.nav_otros) {
-            fragment= new Otros();
-            CambiarFragment(fragment);
+            fragment = new Otros();
+            CambiarFragmentDrawer(fragment);
         }
 
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    public void CambiarFragment(Fragment fragment){
+
+    public void CambiarFragment(Fragment fragment) {
         getSupportFragmentManager()
                 .beginTransaction().
                 replace(R.id.frag_contenedor, fragment)
                 .setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out)
+                .commit();
+    }
+
+    public void CambiarFragmentDrawer(Fragment fragment) {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.frag_contenedor, fragment)
+                .setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out)
+                .addToBackStack(null)
                 .commit();
     }
 }

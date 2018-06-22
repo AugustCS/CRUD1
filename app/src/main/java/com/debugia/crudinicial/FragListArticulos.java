@@ -10,6 +10,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -26,7 +27,7 @@ public class FragListArticulos extends Fragment {
     Activity activity;
     LinearLayout layout_cointairner;
     ArrayList<List<String>> articulos = new ArrayList<>();
-
+Button b_filtro;
     public FragListArticulos() {
     }
 
@@ -36,7 +37,16 @@ public class FragListArticulos extends Fragment {
         activity = getActivity();
         View view = inflater.inflate(R.layout.fragment_lista_articulos, container, false);
         layout_cointairner = view.findViewById(R.id.ly_contenedor);
+        b_filtro=view.findViewById(R.id.b_filtro);
         articulos = CodigosGenerales.getListArticulos();
+        b_filtro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment= new FragFiltros();
+                CambiarFragment(fragment);
+            }
+        });
+
         GenerarFilas();
         return view;
     }
@@ -72,8 +82,6 @@ public class FragListArticulos extends Fragment {
                         public void onClick(View v) {
                             Fragment fragment;
                             CodigosGenerales.Cod_Articulo=articulos.get(finalI).get(1);
-                            Log.d("Codigo", articulos.get(finalI).get(1));
-                            Log.d("Codigo", articulos.get(finalI).get(3));
                             fragment = new FragListArtiDescripcion();
                             CambiarFragment(fragment);
                         }

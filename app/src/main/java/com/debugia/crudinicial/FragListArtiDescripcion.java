@@ -1,6 +1,7 @@
 package com.debugia.crudinicial;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -37,7 +38,7 @@ public class FragListArtiDescripcion extends Fragment {
 
 
     LayoutInflater layoutInflater;
-    ImageButton ib_info;
+    ImageButton ib_info,b_share;
     TextView et_nom_family, et_stock, et_precio;
     ImageView iv_imagen;
 
@@ -56,12 +57,26 @@ public class FragListArtiDescripcion extends Fragment {
         et_precio = view.findViewById(R.id.et_precio);
         iv_imagen = view.findViewById(R.id.iv_imagen);
         ib_info = view.findViewById(R.id.ib_info);
+        b_share = view.findViewById(R.id.b_share);
 
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.polo);
         RoundedBitmapDrawable mDrawable = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
         mDrawable.setCircular(true);
         iv_imagen.setImageDrawable(mDrawable);
 
+        b_share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                sharingIntent.setType("text/plain");
+                String shareBodyText = "Encia un mensaje";
+                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"Titulo");
+                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBodyText);
+                startActivity(Intent.createChooser(sharingIntent, "Opciones"));
+            }
+        });
         iv_imagen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -99,22 +114,20 @@ public class FragListArtiDescripcion extends Fragment {
                             popupWindow.dismiss();
                         }
                     });
+                    popupWindow.setOutsideTouchable(true);
+                    popupWindow.setFocusable(true);
                     popupWindow.showAsDropDown(ib_info, 50, 0);
-                    popup_Abierto=false;
+                    popup_Abierto = true;
                 } else {
                     try {
-                        if (popupWindow != null)
-                            popupWindow.dismiss();
-                        else
-                            Log.d("ib_info", "popup null");
+                        popupWindow.dismiss();
                     } catch (Exception e) {
                         Log.d("ib_info", e.getMessage());
                     }
-                    popup_Abierto=true;
+                    popup_Abierto = false;
                 }
             }
         });
-
         return view;
     }
 
