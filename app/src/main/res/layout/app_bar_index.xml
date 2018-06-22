@@ -66,7 +66,7 @@
 
                     <ImageView
                         android:id="@+id/iv_logo"
-                        android:layout_width="?android:attr/actionBarSize"
+                            android:layout_width="?android:attr/actionBarSize"
                         android:layout_height="wrap_content"
                         app:srcCompat="@mipmap/icapk" />
 
@@ -83,7 +83,7 @@
                         android:id="@+id/button4"
                         android:layout_width="?android:attr/actionBarSize"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/agregar_producto" />
+                        android:background="@drawable/car_color" />
                 </LinearLayout>
             </LinearLayout>
 
