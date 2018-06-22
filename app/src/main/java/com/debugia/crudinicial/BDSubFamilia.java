@@ -10,28 +10,30 @@ import java.util.Arrays;
 import java.util.List;
 
 public class BDSubFamilia {
-    public static String cSubfamilia;
-    public static ArrayList<List<String>> myArray = new ArrayList<>();
 
-    public static ArrayList getListSubFamilia(String cnom_familia) {
-        ArrayList Familia = new ArrayList<String>();
+    public String cCodigo;
+    public ArrayList<List<String>> arrayLista = new ArrayList<>();
+    public ArrayList<List<String>> arrayArticulos = new ArrayList<>();
+
+    public ArrayList getListaNombres(String Nombre) {
+        ArrayList listaNombres = new ArrayList<String>();
         Connection connection = null;
 
         try {
-            myArray.clear();
+            arrayLista.clear();
             connection= BConexionSQL.getConnection();
 
             String stsql = "select * from Hsubfamilia_art where ccod_empresa=? and cnom_subfamilia like ? ";
 
             PreparedStatement query = connection.prepareStatement(stsql);
             query.setString(1, BDUsuario.CodEmp);
-            query.setString(2, cnom_familia+"%");
+            query.setString(2, Nombre+"%");
 
             ResultSet rs = query.executeQuery();
 
             while (rs.next()) {
-                Familia.add(rs.getString("cnom_subfamilia"));
-                myArray.add(Arrays.asList(
+                listaNombres.add(rs.getString("cnom_subfamilia"));
+                arrayLista.add(Arrays.asList(
                         rs.getString(1),
                         rs.getString(2),
                         rs.getString(3)));
@@ -39,26 +41,29 @@ public class BDSubFamilia {
             connection.close();
 
         } catch (Exception e) {
-            Log.d("getListSubFamilia", e.getMessage());
+            Log.d("BDSubFamilia", "- getListaNombres: "+e.getMessage());
         }
-        return Familia;
+        return listaNombres;
     }
-    public static ArrayList<List<String>> getListSubFamiliaArticulos() {
-        ArrayList<List<String>> articulos = new ArrayList<>();
+
+    public ArrayList<List<String>> getListaArticulos(String Nombre) {
+
         Connection connection = null;
         try {
+            arrayArticulos.clear();
             connection= BConexionSQL.getConnection();
 
-            String stsql = "select * from Harticul where ccod_empresa=? and ccod_subfamilia=?  ";
+            String stsql = "select * from Harticul where ccod_empresa=? and ccod_subfamilia=? and cnom_articulo like ? ";
 
             PreparedStatement query = connection.prepareStatement(stsql);
             query.setString(1, BDUsuario.CodEmp);
-            query.setString(2, cSubfamilia);
+            query.setString(2, cCodigo);
+            query.setString(3, Nombre+"%");
 
             ResultSet rs = query.executeQuery();
 
             while (rs.next()) {
-                articulos.add(Arrays.asList(
+                arrayArticulos.add(Arrays.asList(
                         rs.getString(1),
                         rs.getString(2),
                         rs.getString(13),
@@ -68,14 +73,12 @@ public class BDSubFamilia {
             connection.close();
 
         } catch (Exception e) {
-            Log.d("SubamiliaArticulos", e.getMessage());
+            Log.d("BDSubFamilia", "- getListaArticulos: "+e.getMessage());
         }
-        return articulos;
+        return arrayArticulos;
     }
-
-
-    public static ArrayList<List<String>> getDescripcion(String Cod_Articulo) {
-        ArrayList<List<String>> articulos = new ArrayList<>();
+    public ArrayList<List<String>> getArticuloSeleccionado(String Codigo) {
+        ArrayList<List<String>> arrayArticuloSeleccionado = new ArrayList<>();
         Connection connection = null;
         try {
             connection= BConexionSQL.getConnection();
@@ -84,14 +87,16 @@ public class BDSubFamilia {
 
             PreparedStatement query = connection.prepareStatement(stsql);
             query.setString(1, BDUsuario.CodEmp);
-            query.setString(2, cSubfamilia);
-            query.setString(3, Cod_Articulo);
+            query.setString(2, cCodigo);
+            query.setString(3, Codigo);
 
             ResultSet rs = query.executeQuery();
 
             while (rs.next()) {
-                articulos.add(Arrays.asList(
-                        rs.getString(1),
+                arrayArticuloSeleccionado.add(Arrays.asList(
+                        rs.getString("cnom_articulo"),
+                        rs.getString("cunidad"),
+                        rs.getString("cmonedav"),
                         rs.getString(2),
                         rs.getString(13),
                         rs.getString(14),
@@ -100,8 +105,8 @@ public class BDSubFamilia {
             connection.close();
 
         } catch (Exception e) {
-            Log.d("ArticulosDescripción", e.getMessage());
+            Log.d("BDSubFamilia", "- getArticuloSeleccionado: "+e.getMessage());
         }
-        return articulos;
+        return arrayArticuloSeleccionado;
     }
 }

@@ -20,6 +20,14 @@
                 android:layout_height="wrap_content"
                 android:text="Filtro" />
 
+            <EditText
+                android:id="@+id/et_buscar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Buscar...."
+                android:inputType="textPersonName" />
+
             <LinearLayout
                 android:id="@+id/ly_contenedor"
                 android:layout_width="match_parent"

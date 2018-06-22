@@ -12,18 +12,83 @@
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_filtro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/b_borrar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Borrar todo" />
+
+                <Button
+                    android:id="@+id/b_listo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Listo" />
+
+
+            </LinearLayout>
+
+        </android.support.v7.widget.Toolbar>
+
+
+
+        <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize"
             android:background="@color/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay">
-
-            <ImageView
-                android:id="@+id/iv_logo"
-                android:layout_width="?android:attr/actionBarSize"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:srcCompat="@mipmap/icapk" />
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/iv_logo"
+                        android:layout_width="?android:attr/actionBarSize"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@mipmap/icapk" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/button4"
+                        android:layout_width="?android:attr/actionBarSize"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/agregar_producto" />
+                </LinearLayout>
+            </LinearLayout>
+
         </android.support.v7.widget.Toolbar>
+
 
 
     </android.support.design.widget.AppBarLayout>

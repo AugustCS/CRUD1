@@ -2,28 +2,38 @@ package com.debugia.crudinicial;
 
 import android.util.Log;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class CodigosGenerales {
+
+    public static Integer ConceptoElegido;
     public static Boolean Iniciar=true;
     public static String Tipo = "";
     public static ArrayList<List<String>> listArrayList = new ArrayList<>();
     public static String Cod_Articulo = "";
     public static String nom_categoria="";
 
-    public static ArrayList getList(String Nombre) {
+    public static BDFamilia bdFamilia=new BDFamilia();
+    public static BDSubFamilia bdSubFamilia=new BDSubFamilia();
+    public static BDConcepto bdConcepto= new BDConcepto();
+
+    public static ArrayList getListaNombres(String Nombre) {
         try {
             switch (Tipo) {
                 case "Familia":
-                    return BDFamilia.getListFamilia(Nombre);
+                    return bdFamilia.getListaNombres(Nombre);
                 case "SubFamilia":
-                    return BDSubFamilia.getListSubFamilia(Nombre);
+                    return bdSubFamilia.getListaNombres(Nombre);
                 case "Concepto":
-                    return BDConcepto.getListConcepto(Nombre);
+                    return bdConcepto.getListaNombres(Nombre);
             }
         } catch (Exception e) {
-            Log.d("getList", e.getMessage());
+            Log.d("CodigosGenerales"," -getList: "+ e.getMessage());
         }
         return null;
     }
@@ -32,14 +42,14 @@ public class CodigosGenerales {
         try {
             switch (Tipo) {
                 case "Familia":
-                    return BDFamilia.myArray;
+                    return bdFamilia.arrayLista;
                 case "SubFamilia":
-                    return BDSubFamilia.myArray;
+                    return bdSubFamilia.arrayLista;
                 case "Concepto":
-                    return BDConcepto.myArray;
+                    return bdConcepto.arrayLista;
             }
         } catch (Exception e) {
-            Log.d("getlistArrayList", e.getMessage());
+            Log.d("CodigosGenerales"," -getlistArrayList: "+ e.getMessage());
         }
         return null;
     }
@@ -48,30 +58,30 @@ public class CodigosGenerales {
         try {
             switch (Tipo) {
                 case "Familia":
-                    BDFamilia.cfamilia = Codigo;
+                    bdFamilia.cCodigo = Codigo;
                 case "SubFamilia":
-                    BDSubFamilia.cSubfamilia = Codigo;
+                    bdSubFamilia.cCodigo = Codigo;
                 case "Concepto":
-                    BDConcepto.cConcepto = Codigo;
+                    bdConcepto.cCodigo = Codigo;
             }
         } catch (Exception e) {
-            Log.d("SetCodigLisArticulos", e.getMessage());
+            Log.d("CodigosGenerales"," -SetCodigLisArticulos: "+ e.getMessage());
         }
     }
 
 
-    public static ArrayList<List<String>> getListArticulos() {
+    public static ArrayList<List<String>> getListArticulos(String Nombre) {
         try {
             switch (Tipo) {
                 case "Familia":
-                    return BDFamilia.getListFamiliaArticulos();
+                    return bdFamilia.getListaArticulos(Nombre);
                 case "SubFamilia":
-                    return BDSubFamilia.getListSubFamiliaArticulos();
+                    return bdSubFamilia.getListaArticulos(Nombre);
                 case "Concepto":
-                    return BDConcepto.getListConceptoArticulos();
+                    return bdConcepto.getListaArticulos(Nombre);
             }
         } catch (Exception e) {
-            Log.d("getListArticulos", e.getMessage());
+            Log.d("CodigosGenerales"," -getListArticulos: "+ e.getMessage());
         }
         return null;
     }
@@ -80,15 +90,21 @@ public class CodigosGenerales {
         try {
             switch (Tipo) {
                 case "Familia":
-                    return BDFamilia.getDescripcion(Cod_Articulo);
+                    return bdFamilia.getArticuloSeleccionado(Cod_Articulo);
                 case "SubFamilia":
-                   return   BDSubFamilia.getDescripcion(Cod_Articulo);
+                   return   bdSubFamilia.getArticuloSeleccionado(Cod_Articulo);
                 case "Concepto":
-                    return BDConcepto.getDescripcion(Cod_Articulo);
+                    return bdConcepto.getArticuloSeleccionado(Cod_Articulo);
             }
         } catch (Exception e) {
             Log.d("SetCodigLisArticulos", e.getMessage());
         }
         return null;
     }
+
+    public static ArrayList getListFiltros() {
+
+        return null;
+    }
+
 }

@@ -42,7 +42,7 @@ public class FragLista extends Fragment {
         lv_items=view.findViewById(R.id.lv_items);
         et_bucar=view.findViewById(R.id.et_buscar);
 
-        arrayList= CodigosGenerales.getList("");
+        arrayList= CodigosGenerales.getListaNombres("");
         arrayAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1, arrayList);
         lv_items.setAdapter(arrayAdapter);
 
@@ -80,7 +80,7 @@ public class FragLista extends Fragment {
 
 
     private void getData(){
-        arrayList= CodigosGenerales.getList(et_bucar.getText().toString());
+        arrayList= CodigosGenerales.getListaNombres(et_bucar.getText().toString());
         arrayAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1, arrayList);
         lv_items.setAdapter(arrayAdapter);
     }

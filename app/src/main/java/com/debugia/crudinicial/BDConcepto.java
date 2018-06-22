@@ -10,9 +10,12 @@ import java.util.Arrays;
 import java.util.List;
 
 public class BDConcepto {
-    public static Integer concepto;
-    public static String cConcepto;
-    public static ArrayList<List<String>> myArray = new ArrayList<>();
+    public Integer concepto=CodigosGenerales.ConceptoElegido;
+    public String cCodigo;
+    public ArrayList<List<String>> arrayLista = new ArrayList<>();
+    public ArrayList<List<String>> arrayArticulos = new ArrayList<>();
+
+
     public static ArrayList getListConceptos() {
         ArrayList arrayList = new ArrayList<String>();
         Connection connection = null;
@@ -40,26 +43,25 @@ public class BDConcepto {
         return arrayList;
     }
 
-
-    public static ArrayList getListConcepto(String cnom_familia) {
-        ArrayList Familia = new ArrayList<String>();
+    public ArrayList getListaNombres(String Nombre) {
+        ArrayList listaNombres = new ArrayList<String>();
         Connection connection = null;
-
+        Integer concepto=CodigosGenerales.ConceptoElegido;
         try {
-            myArray.clear();
+            arrayLista.clear();
             connection= BConexionSQL.getConnection();
 
             String stsql = "select * from Erp_concepto"+concepto+" where erp_codemp=? and erp_nomcon like ? ";
 
             PreparedStatement query = connection.prepareStatement(stsql);
             query.setString(1, BDUsuario.CodEmp);
-            query.setString(2, cnom_familia+"%");
+            query.setString(2, Nombre+"%");
 
             ResultSet rs = query.executeQuery();
 
             while (rs.next()) {
-                Familia.add(rs.getString("erp_nomcon"));
-                myArray.add(Arrays.asList(
+                listaNombres.add(rs.getString("erp_nomcon"));
+                arrayLista.add(Arrays.asList(
                         rs.getString(1),
                         rs.getString(2),
                         rs.getString(3)));
@@ -67,49 +69,52 @@ public class BDConcepto {
             connection.close();
 
         } catch (Exception e) {
-            Log.d("getListConcepto", e.getMessage());
+            Log.d("BDConcepto", "- getListaNombres: "+e.getMessage());
         }
-        return Familia;
+        return listaNombres;
     }
 
-    public static ArrayList<List<String>> getListConceptoArticulos() {
-        ArrayList<List<String>> articulos = new ArrayList<>();
+    public ArrayList<List<String>> getListaArticulos(String Nombre) {
+
         Connection connection = null;
         try {
+            arrayArticulos.clear();
             connection= BConexionSQL.getConnection();
+
             String stsql=null;
             switch (concepto){
                 case 1:
-                    stsql = "select * from Harticul where ccod_empresa=? and codmarca = ? ";
+                    stsql = "select * from Harticul where ccod_empresa=? and codmarca = ? and cnom_articulo like ?";
                     break;
                 case 2:
-                    stsql = "select * from Harticul where ccod_empresa=? and modelo = ? ";
+                    stsql = "select * from Harticul where ccod_empresa=? and modelo = ? and cnom_articulo like ?";
                     break;
                 case 3:
-                    stsql = "select * from Harticul where ccod_empresa=? and color = ? ";
+                    stsql = "select * from Harticul where ccod_empresa=? and color = ? and cnom_articulo like ?";
                     break;
                 case 4:
-                    stsql = "select * from Harticul where ccod_empresa=? and tratamiento = ? ";
+                    stsql = "select * from Harticul where ccod_empresa=? and tratamiento = ? and cnom_articulo like ?";
                     break;
                 case 5:
-                    stsql = "select * from Harticul where ccod_empresa=? and fuelle = ? ";
+                    stsql = "select * from Harticul where ccod_empresa=? and fuelle = ? and cnom_articulo like ?";
                     break;
                 case 6:
-                    stsql = "select * from Harticul where ccod_empresa=? and azas = ? ";
+                    stsql = "select * from Harticul where ccod_empresa=? and azas = ? and cnom_articulo like ?";
                     break;
                 case 7:
-                    stsql = "select * from Harticul where ccod_empresa=? and solapa = ? ";
+                    stsql = "select * from Harticul where ccod_empresa=? and solapa = ? and cnom_articulo like ?";
                     break;
             }
 
             PreparedStatement query = connection.prepareStatement(stsql);
             query.setString(1, BDUsuario.CodEmp);
-            query.setString(2, cConcepto);
+            query.setString(2, cCodigo);
+            query.setString(3, Nombre+"%");
 
             ResultSet rs = query.executeQuery();
 
             while (rs.next()) {
-                articulos.add(Arrays.asList(
+                arrayArticulos.add(Arrays.asList(
                         rs.getString(1),
                         rs.getString(2),
                         rs.getString(13),
@@ -119,13 +124,12 @@ public class BDConcepto {
             connection.close();
 
         } catch (Exception e) {
-            Log.d("ConceptoArticulos", e.getMessage());
+            Log.d("BDConcepto", "- getListaArticulos: "+e.getMessage());
         }
-        return articulos;
+        return arrayArticulos;
     }
-
-    public static ArrayList<List<String>> getDescripcion(String Cod_Articulo) {
-        ArrayList<List<String>> articulos = new ArrayList<>();
+    public ArrayList<List<String>> getArticuloSeleccionado(String Codigo) {
+        ArrayList<List<String>> arrayArticuloSeleccionado = new ArrayList<>();
         Connection connection = null;
         try {
             connection= BConexionSQL.getConnection();
@@ -155,16 +159,19 @@ public class BDConcepto {
                     break;
             }
 
+
             PreparedStatement query = connection.prepareStatement(stsql);
             query.setString(1, BDUsuario.CodEmp);
-            query.setString(2, cConcepto);
-            query.setString(3, Cod_Articulo);
+            query.setString(2, cCodigo);
+            query.setString(3, Codigo);
 
             ResultSet rs = query.executeQuery();
 
             while (rs.next()) {
-                articulos.add(Arrays.asList(
-                        rs.getString(1),
+                arrayArticuloSeleccionado.add(Arrays.asList(
+                        rs.getString("cnom_articulo"),
+                        rs.getString("cunidad"),
+                        rs.getString("cmonedav"),
                         rs.getString(2),
                         rs.getString(13),
                         rs.getString(14),
@@ -173,8 +180,8 @@ public class BDConcepto {
             connection.close();
 
         } catch (Exception e) {
-            Log.d("ArticulosDescripción", e.getMessage());
+            Log.d("BDConcepto", "- getArticuloSeleccionado: "+e.getMessage());
         }
-        return articulos;
+        return arrayArticuloSeleccionado;
     }
 }

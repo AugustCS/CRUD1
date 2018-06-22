@@ -5,12 +5,16 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -27,7 +31,9 @@ public class FragListArticulos extends Fragment {
     Activity activity;
     LinearLayout layout_cointairner;
     ArrayList<List<String>> articulos = new ArrayList<>();
-Button b_filtro;
+    Button b_filtro;
+    EditText et_bucar;
+
     public FragListArticulos() {
     }
 
@@ -37,16 +43,33 @@ Button b_filtro;
         activity = getActivity();
         View view = inflater.inflate(R.layout.fragment_lista_articulos, container, false);
         layout_cointairner = view.findViewById(R.id.ly_contenedor);
-        b_filtro=view.findViewById(R.id.b_filtro);
-        articulos = CodigosGenerales.getListArticulos();
+        b_filtro = view.findViewById(R.id.b_filtro);
+        et_bucar=view.findViewById(R.id.et_buscar);
+
+        articulos = CodigosGenerales.getListArticulos("");
         b_filtro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Fragment fragment= new FragFiltros();
+                Fragment fragment = new FragFiltros();
                 CambiarFragment(fragment);
             }
         });
 
+        et_bucar.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                articulos = CodigosGenerales.getListArticulos(et_bucar.getText().toString());
+                GenerarFilas();;
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
         GenerarFilas();
         return view;
     }
@@ -63,8 +86,8 @@ Button b_filtro;
                 linearLayouth.setMinimumHeight(RelativeLayout.LayoutParams.MATCH_PARENT);
                 layout_cointairner.addView(linearLayouth);
                 for (int a = 0; a < 2; a++) {
-                    i=i+a;
-                    if(!(i<articulos.size()))
+                    i = i + a;
+                    if (!(i < articulos.size()))
                         break;
                     LinearLayout linearLayoutv = new LinearLayout(activity);
                     linearLayoutv.setOrientation(LinearLayout.VERTICAL);
@@ -81,7 +104,7 @@ Button b_filtro;
                         @Override
                         public void onClick(View v) {
                             Fragment fragment;
-                            CodigosGenerales.Cod_Articulo=articulos.get(finalI).get(1);
+                            CodigosGenerales.Cod_Articulo = articulos.get(finalI).get(1);
                             fragment = new FragListArtiDescripcion();
                             CambiarFragment(fragment);
                         }

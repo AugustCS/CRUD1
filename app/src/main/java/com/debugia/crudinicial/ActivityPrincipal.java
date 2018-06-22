@@ -1,10 +1,8 @@
 package com.debugia.crudinicial;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.support.design.widget.NavigationView;
@@ -30,6 +28,9 @@ public class ActivityPrincipal extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_index);
         Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar_filtro=findViewById(R.id.toolbar_filtro);
+        toolbar_filtro.setVisibility(View.GONE);
+
         setSupportActionBar(toolbar);
         toolbar.setTitle("");
 
@@ -81,6 +82,7 @@ public class ActivityPrincipal extends AppCompatActivity
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             BDUsuario.getExitLogin();
+                            getSupportActionBar().hide();
                             CodigosGenerales.Iniciar = true;
                             ActivityPrincipal.super.onBackPressed();
                         }
@@ -94,6 +96,7 @@ public class ActivityPrincipal extends AppCompatActivity
         }
     }
 
+/*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -117,9 +120,9 @@ public class ActivityPrincipal extends AppCompatActivity
 
 
         }
-
         return super.onOptionsItemSelected(item);
     }
+*/
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override

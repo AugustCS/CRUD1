@@ -6,4 +6,5 @@
     <color name="colorBlack">#000000</color>
     <color name="colorWhite">#ffffff</color>
     <color name="colorBarra">#212F3C</color>
+    <color name="fondoPopUp">#6d8698a7</color>
 </resources>

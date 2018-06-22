@@ -22,6 +22,9 @@ public class FragMenuPrincipal extends Fragment implements View.OnClickListener 
     Button b_familia, b_sub_familia;
     LinearLayout ly_menu;
 
+    BDFamilia bdFamilia=new BDFamilia();
+    BDSubFamilia bdSubFamilia=new BDSubFamilia();
+    BDConcepto bdConcepto= new BDConcepto();
     public FragMenuPrincipal() {
         // Required empty public constructor
     }
@@ -86,43 +89,43 @@ public class FragMenuPrincipal extends Fragment implements View.OnClickListener 
                 CambiarFragment(fragment);
                 break;
             case (1):
-                BDConcepto.concepto = 1;
+                CodigosGenerales.ConceptoElegido=1;
                 CodigosGenerales.Tipo = "Concepto";
                 fragment = new FragLista();
                 CambiarFragment(fragment);
                 break;
             case (2):
-                BDConcepto.concepto = 2;
+                CodigosGenerales.ConceptoElegido = 2;
                 CodigosGenerales.Tipo = "Concepto";
                 fragment = new FragLista();
                 CambiarFragment(fragment);
                 break;
             case (3):
-                BDConcepto.concepto = 3;
+                CodigosGenerales.ConceptoElegido = 3;
                 CodigosGenerales.Tipo = "Concepto";
                 fragment = new FragLista();
                 CambiarFragment(fragment);
                 break;
             case (4):
-                BDConcepto.concepto = 4;
+                CodigosGenerales.ConceptoElegido = 4;
                 CodigosGenerales.Tipo = "Concepto";
                 fragment = new FragLista();
                 CambiarFragment(fragment);
                 break;
             case (5):
-                BDConcepto.concepto = 5;
+                CodigosGenerales.ConceptoElegido = 5;
                 CodigosGenerales.Tipo = "Concepto";
                 fragment = new FragLista();
                 CambiarFragment(fragment);
                 break;
             case (6):
-                BDConcepto.concepto = 6;
+                CodigosGenerales.ConceptoElegido = 6;
                 CodigosGenerales.Tipo = "Concepto";
                 fragment = new FragLista();
                 CambiarFragment(fragment);
                 break;
             case (7):
-                BDConcepto.concepto = 7;
+                CodigosGenerales.ConceptoElegido = 7;
                 CodigosGenerales.Tipo = "Concepto";
                 fragment = new FragLista();
                 CambiarFragment(fragment);

@@ -1,24 +1,41 @@
 package com.debugia.crudinicial;
 
 
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
+import android.support.v7.widget.Toolbar;
+
+import java.util.ArrayList;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FragFiltros extends Fragment implements View.OnClickListener {
+public class FragFiltros extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener {
 
-    Button b_xs, b_s, b_m, b_l, b_xl, b_xxl;
+
+    BDFamilia bdFamilia=new BDFamilia();
+    BDSubFamilia bdSubFamilia=new BDSubFamilia();
+    BDConcepto bdConcepto= new BDConcepto();
+
+
+    ArrayList arrayList = new ArrayList<String>();
+    ArrayAdapter<String> adapterFamilia, adapterSubFamilia;
+    ListView lv_familia, lv_subfamilia;
+    Toolbar toolbar_filtro, toolbar;
+
+    Button b_borrar, b_listo;
 
     public FragFiltros() {
         // Required empty public constructor
@@ -30,59 +47,106 @@ public class FragFiltros extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_filtros, container, false);
-        b_xs = view.findViewById(R.id.b_xs);
-        b_s = view.findViewById(R.id.b_s);
-        b_m = view.findViewById(R.id.b_m);
-        b_l = view.findViewById(R.id.b_l);
-        b_xl = view.findViewById(R.id.b_xl);
-        b_xxl = view.findViewById(R.id.b_xxl);
 
+        lv_familia = view.findViewById(R.id.lv_familia);
+        lv_subfamilia = view.findViewById(R.id.lv_subfamilia);
 
-        b_xs.setOnClickListener(this);
-        b_s.setOnClickListener(this);
-        b_m.setOnClickListener(this);
-        b_l.setOnClickListener(this);
-        b_xl.setOnClickListener(this);
-        b_xxl.setOnClickListener(this);
-        /*
-          GradientDrawable gd = new GradientDrawable();
-        gd.setColor(0xFF00FF00); // Changes this drawbale to use a single color instead of a gradient
-        gd.setCornerRadius(5);
-        gd.setStroke(1, 0xFF000000);
-        TextView tv = (TextView)findViewById(R.id.textView1);
-        tv.setBackground(gd);
-         */
+        toolbar_filtro = getActivity().findViewById(R.id.toolbar_filtro);
+        toolbar = getActivity().findViewById(R.id.toolbar);
+        b_borrar = getActivity().findViewById(R.id.b_borrar);
+        b_listo = getActivity().findViewById(R.id.b_listo);
+
+        toolbar_filtro.setVisibility(View.VISIBLE);
+        toolbar.setVisibility(View.GONE);
+
+        try {
+            ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar_filtro);
+        } catch (Exception e) {
+            Log.d("getSupportActionBar", e.getMessage());
+        }
+
+        adapterFamilia = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_multiple_choice, bdFamilia.getListaNombres(""));
+        adapterSubFamilia = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_multiple_choice, bdSubFamilia.getListaNombres(""));
+
+        lv_familia.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        lv_subfamilia.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+
+        lv_familia.setAdapter(adapterFamilia);
+        lv_subfamilia.setAdapter(adapterSubFamilia);
+
+        lv_familia.setOnItemClickListener(this);
+        lv_subfamilia.setOnItemClickListener(this);
+
+        b_listo.setOnClickListener(this);
+        b_borrar.setOnClickListener(this);
         return view;
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case (R.id.b_xs):
+            case (R.id.b_listo):
+                ArrayList Fam_Selected=new ArrayList();
+                int len = lv_familia.getCount();
+                SparseBooleanArray checked = lv_familia.getCheckedItemPositions();
 
-                b_xs.setTextColor(Color.WHITE);
-                b_xs.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.border_active));
+                for (int i = 0; i < len; i++) {
+                    if (checked.get(i))
+                        Fam_Selected.add(i);
+                }
+
+
                 break;
-            case (R.id.b_s):
-                b_s.setTextColor(Color.WHITE);
-                b_s.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.border_active));
-                break;
-            case (R.id.b_m):
-                b_m.setTextColor(Color.WHITE);
-                b_m.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.border_active));
-                break;
-            case (R.id.b_l):
-                b_l.setTextColor(Color.WHITE);
-                b_l.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.border_active));
-                break;
-            case (R.id.b_xl):
-                b_xl.setTextColor(Color.WHITE);
-                b_xl.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.border_active));
-                break;
-            case (R.id.b_xxl):
-                b_xxl.setTextColor(Color.WHITE);
-                b_xxl.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.border_active));
+            case (R.id.b_borrar):
+                try {
+                    lv_familia.clearChoices();
+                    lv_subfamilia.clearChoices();
+                    for (int i = 0; i < lv_familia.getCount(); i++) {
+                        lv_familia.setItemChecked(i, false);
+                    }
+                    for (int i = 0; i < lv_subfamilia.getCount(); i++) {
+                        lv_subfamilia.setItemChecked(i, false);
+                    }
+                } catch (Exception e) {
+                    Log.d("Error", e.getMessage());
+                }
                 break;
         }
+    }
+
+    private void getData() {
+        arrayList = CodigosGenerales.getListFiltros();
+        //arrayAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1, arrayList);
+        //lv_items.setAdapter(arrayAdapter);
+    }
+
+    public void CambiarFragment(Fragment fragment) {
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.frag_contenedor, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        switch (view.getId()) {
+            case (R.id.lv_familia):
+                lv_familia.setItemChecked(2, true);
+                break;
+            case (R.id.lv_subfamilia):
+                break;
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        toolbar_filtro.setVisibility(View.GONE);
+        toolbar.setVisibility(View.VISIBLE);
+        try {
+            ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        } catch (Exception e) {
+            Log.d("getSupportActionBar", e.getMessage());
+        }
+        super.onDetach();
     }
 }
