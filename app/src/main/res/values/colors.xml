@@ -7,4 +7,5 @@
     <color name="colorWhite">#ffffff</color>
     <color name="colorBarra">#212F3C</color>
     <color name="fondoPopUp">#6d8698a7</color>
+    <color name="colorBase">#FAFAFA</color>
 </resources>
