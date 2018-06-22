@@ -68,7 +68,7 @@
                         android:id="@+id/iv_logo"
                             android:layout_width="?android:attr/actionBarSize"
                         android:layout_height="wrap_content"
-                        app:srcCompat="@mipmap/icapk" />
+                        app:srcCompat="@drawable/logo" />
 
                 </LinearLayout>
 
