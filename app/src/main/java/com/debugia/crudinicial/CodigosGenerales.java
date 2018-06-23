@@ -21,6 +21,7 @@ public class CodigosGenerales {
     public static BDFamilia bdFamilia=new BDFamilia();
     public static BDSubFamilia bdSubFamilia=new BDSubFamilia();
     public static BDConcepto bdConcepto= new BDConcepto();
+    public static ArrayList<List<String>> arrayArticulosFiltrados = new ArrayList<>();
 
     public static List getListaNombres(String Nombre) {
         try {
@@ -79,6 +80,8 @@ public class CodigosGenerales {
                     return bdSubFamilia.getListaArticulos(Nombre);
                 case "Concepto":
                     return bdConcepto.getListaArticulos(Nombre);
+                case "Filtro":
+                    return arrayArticulosFiltrados;
             }
         } catch (Exception e) {
             Log.d("CodigosGenerales"," -getListArticulos: "+ e.getMessage());

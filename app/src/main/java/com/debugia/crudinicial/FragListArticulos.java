@@ -5,6 +5,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -34,6 +36,8 @@ public class FragListArticulos extends Fragment {
     Button b_filtro;
     EditText et_bucar;
 
+    Toolbar toolbar_filtro, toolbar;
+
     public FragListArticulos() {
     }
 
@@ -45,11 +49,15 @@ public class FragListArticulos extends Fragment {
         layout_cointairner = view.findViewById(R.id.ly_contenedor);
         b_filtro = view.findViewById(R.id.b_filtro);
         et_bucar=view.findViewById(R.id.et_buscar);
-
+        toolbar=getActivity().findViewById(R.id.toolbar);
+        toolbar_filtro=getActivity().findViewById(R.id.toolbar_filtro);
         articulos = CodigosGenerales.getListArticulos("");
         b_filtro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar_filtro);
+                toolbar.setVisibility(View.GONE);
+                toolbar_filtro.setVisibility(View.VISIBLE);
                 Fragment fragment = new FragFiltros();
                 CambiarFragment(fragment);
             }
