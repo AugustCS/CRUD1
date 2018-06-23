@@ -195,4 +195,7 @@ public class ExpListViewAdapterWithCheckbox extends BaseExpandableListAdapter {
     public ArrayList<List<Integer>> getCheckedList() {
         return CheckedList;
     }
+    public void ClearAllCheckBoxes(){
+        mChildCheckStates.clear();
+    }
 }

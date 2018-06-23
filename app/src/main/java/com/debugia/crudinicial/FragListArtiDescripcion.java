@@ -75,10 +75,11 @@ public class FragListArtiDescripcion extends Fragment {
 
                 Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
                 sharingIntent.setType("text/plain");
-                String shareBodyText = "Encia un mensaje";
+                String shareBodyText = "Envia un mensaje";
                 sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Titulo");
                 sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBodyText);
-                startActivity(Intent.createChooser(sharingIntent, "Opciones"));
+
+                startActivity(Intent.createChooser(sharingIntent, "Compartir este producto"));
             }
         });
         iv_imagen.setOnClickListener(new View.OnClickListener() {

@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FragFiltros extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener {
+public class FragFiltros extends Fragment implements View.OnClickListener {
 
     ExpandableListAdapter listAdapter;
     ExpListViewAdapterWithCheckbox listAdapterCheckbox;
@@ -40,7 +40,7 @@ public class FragFiltros extends Fragment implements View.OnClickListener, Adapt
     BDFamilia bdFamilia = new BDFamilia();
     BDSubFamilia bdSubFamilia = new BDSubFamilia();
     BDConcepto bdConcepto = new BDConcepto();
-    BDFiltros bdFiltros=new BDFiltros();
+    BDFiltros bdFiltros = new BDFiltros();
 
     Button b_borrar, b_listo;
 
@@ -64,10 +64,10 @@ public class FragFiltros extends Fragment implements View.OnClickListener, Adapt
         listAdapter = new ExpandableListAdapter(getContext(), listDataHeader, listDataChild);
         listAdapterCheckbox = new ExpListViewAdapterWithCheckbox(getContext(), listDataHeader, listDataChild);
 
-        toolbar=getActivity().findViewById(R.id.toolbar);
-        toolbar_filtro=getActivity().findViewById(R.id.toolbar_filtro);
-        b_borrar=getActivity().findViewById(R.id.b_borrar);
-        b_listo=getActivity().findViewById(R.id.b_listo);
+        toolbar = getActivity().findViewById(R.id.toolbar);
+        toolbar_filtro = getActivity().findViewById(R.id.toolbar_filtro);
+        b_borrar = getActivity().findViewById(R.id.b_borrar);
+        b_listo = getActivity().findViewById(R.id.b_listo);
 
         expListView.setAdapter(listAdapterCheckbox);
 
@@ -189,7 +189,6 @@ public class FragFiltros extends Fragment implements View.OnClickListener, Adapt
     public void CambiarFragment(Fragment fragment) {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.frag_contenedor, fragment);
-        transaction.addToBackStack(null);
         transaction.commit();
     }
 
@@ -197,7 +196,10 @@ public class FragFiltros extends Fragment implements View.OnClickListener, Adapt
     public void onClick(View view) {
         switch (view.getId()) {
             case (R.id.b_borrar):
-
+                listAdapterCheckbox.ClearAllCheckBoxes();
+                for (int i = 0; i < listAdapterCheckbox.getGroupCount(); i++) {
+                    expListView.collapseGroup(i);
+                }
                 break;
             case (R.id.b_listo):
                 List<String> Familia = new ArrayList<>();
@@ -209,6 +211,7 @@ public class FragFiltros extends Fragment implements View.OnClickListener, Adapt
                 List<String> Concepto5 = new ArrayList<>();
                 List<String> Concepto6 = new ArrayList<>();
                 List<String> Concepto7 = new ArrayList<>();
+                Boolean Filtrar = false;
                 ArrayList<List<Integer>> CheckedList = listAdapterCheckbox.getCheckedList();
                 Integer j = 0;
                 try {
@@ -217,11 +220,13 @@ public class FragFiltros extends Fragment implements View.OnClickListener, Adapt
                             if (Familia.size() < 1)
                                 j = 0;
                             Familia.add(bdFamilia.arrayLista.get(j).get(1));
+                            Filtrar = true;
                         }
                         if (CheckedList.get(i).get(0) == 1) {
                             if (SubFamilia.size() < 1)
                                 j = 0;
                             SubFamilia.add(bdSubFamilia.arrayLista.get(j).get(1));
+                            Filtrar = true;
                         }
                         if (CheckedList.get(i).get(0) == 2) {
                             if (Concepto1.size() < 1)
@@ -229,6 +234,7 @@ public class FragFiltros extends Fragment implements View.OnClickListener, Adapt
                             CodigosGenerales.ConceptoElegido = 1;
                             bdConcepto.getListaNombres("");
                             Concepto1.add(bdConcepto.arrayLista.get(j).get(1));
+                            Filtrar = true;
                         }
                         if (CheckedList.get(i).get(0) == 3) {
                             if (Concepto2.size() < 1)
@@ -236,6 +242,7 @@ public class FragFiltros extends Fragment implements View.OnClickListener, Adapt
                             CodigosGenerales.ConceptoElegido = 2;
                             bdConcepto.getListaNombres("");
                             Concepto2.add(bdConcepto.arrayLista.get(j).get(1));
+                            Filtrar = true;
                         }
                         if (CheckedList.get(i).get(0) == 4) {
                             if (Concepto3.size() < 1)
@@ -243,6 +250,7 @@ public class FragFiltros extends Fragment implements View.OnClickListener, Adapt
                             CodigosGenerales.ConceptoElegido = 3;
                             bdConcepto.getListaNombres("");
                             Concepto3.add(bdConcepto.arrayLista.get(j).get(1));
+                            Filtrar = true;
                         }
                         if (CheckedList.get(i).get(0) == 5) {
                             if (Concepto4.size() < 1)
@@ -250,6 +258,7 @@ public class FragFiltros extends Fragment implements View.OnClickListener, Adapt
                             CodigosGenerales.ConceptoElegido = 4;
                             bdConcepto.getListaNombres("");
                             Concepto4.add(bdConcepto.arrayLista.get(j).get(1));
+                            Filtrar = true;
                         }
                         if (CheckedList.get(i).get(0) == 6) {
                             if (Concepto5.size() < 1)
@@ -257,6 +266,7 @@ public class FragFiltros extends Fragment implements View.OnClickListener, Adapt
                             CodigosGenerales.ConceptoElegido = 5;
                             bdConcepto.getListaNombres("");
                             Concepto5.add(bdConcepto.arrayLista.get(j).get(1));
+                            Filtrar = true;
                         }
                         if (CheckedList.get(i).get(0) == 7) {
                             if (Concepto6.size() < 1)
@@ -264,6 +274,7 @@ public class FragFiltros extends Fragment implements View.OnClickListener, Adapt
                             CodigosGenerales.ConceptoElegido = 6;
                             bdConcepto.getListaNombres("");
                             Concepto6.add(bdConcepto.arrayLista.get(j).get(1));
+                            Filtrar = true;
                         }
                         if (CheckedList.get(i).get(0) == 8) {
                             if (Concepto7.size() < 1)
@@ -271,29 +282,25 @@ public class FragFiltros extends Fragment implements View.OnClickListener, Adapt
                             CodigosGenerales.ConceptoElegido = 7;
                             bdConcepto.getListaNombres("");
                             Concepto7.add(bdConcepto.arrayLista.get(j).get(1));
+                            Filtrar = true;
                         }
                         j++;
                     }
-                    Log.d("Filtro",Familia+"");
-                    CodigosGenerales.Tipo="Filtro";
-                    CodigosGenerales.arrayArticulosFiltrados=bdFiltros.getListaArticulos(Familia,SubFamilia,Concepto1,Concepto2,Concepto3,Concepto4,Concepto5,Concepto6,Concepto7);
-                    Fragment fragment=new FragListArticulos();
-                    CambiarFragment(fragment);
+                    CodigosGenerales.Tipo = "Filtro";
+                    if (Filtrar) {
+                        CodigosGenerales.arrayArticulosFiltrados = bdFiltros.getListaArticulos(Familia, SubFamilia, Concepto1, Concepto2, Concepto3, Concepto4, Concepto5, Concepto6, Concepto7);
+                        Fragment fragment = new FragListArticulos();
+                        CambiarFragment(fragment);
+                    }
                 } catch (Exception e) {
                     Log.d("b_listo", e.getMessage());
                 }
-                Log.d("getCheckedList", listAdapterCheckbox.getCheckedList() + "");
 
                 break;
         }
     }
 
 
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        switch (view.getId()) {
-        }
-    }
 
     @Override
     public void onDetach() {
