@@ -40,6 +40,7 @@ public class FragLogin extends Fragment implements View.OnClickListener {
         et_ruc.setText("20600124782");
         et_usuario.setText("admin");
         et_clave.setText("12345678");
+        BDCarritoPedidos.arraylistPedidos.clear();
         return view;
 
     }

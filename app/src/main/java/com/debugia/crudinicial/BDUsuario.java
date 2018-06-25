@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class BDUsuario {
     public static String CodEmp = "prueba";
-
+    public  static String CodUsu="01";
     public static Boolean getLogin(String RUC, String Usuario, String Clave) {
         ArrayList Familia = new ArrayList<String>();
         Connection connection = null;

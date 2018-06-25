@@ -12,15 +12,16 @@ import java.util.List;
 public class CodigosGenerales {
 
     public static Integer ConceptoElegido;
-    public static Boolean Iniciar=true;
+    public static Boolean Iniciar = true;
     public static String Tipo = "";
+    public static Boolean Filtro = false    ;
     public static ArrayList<List<String>> listArrayList = new ArrayList<>();
     public static String Cod_Articulo = "";
-    public static String nom_categoria="";
+    public static String nom_categoria = "";
 
-    public static BDFamilia bdFamilia=new BDFamilia();
-    public static BDSubFamilia bdSubFamilia=new BDSubFamilia();
-    public static BDConcepto bdConcepto= new BDConcepto();
+    public static BDFamilia bdFamilia = new BDFamilia();
+    public static BDSubFamilia bdSubFamilia = new BDSubFamilia();
+    public static BDConcepto bdConcepto = new BDConcepto();
     public static ArrayList<List<String>> arrayArticulosFiltrados = new ArrayList<>();
 
     public static List getListaNombres(String Nombre) {
@@ -34,7 +35,7 @@ public class CodigosGenerales {
                     return bdConcepto.getListaNombres(Nombre);
             }
         } catch (Exception e) {
-            Log.d("CodigosGenerales"," -getList: "+ e.getMessage());
+            Log.d("CodigosGenerales", " -getList: " + e.getMessage());
         }
         return null;
     }
@@ -50,7 +51,7 @@ public class CodigosGenerales {
                     return bdConcepto.arrayLista;
             }
         } catch (Exception e) {
-            Log.d("CodigosGenerales"," -getlistArrayList: "+ e.getMessage());
+            Log.d("CodigosGenerales", " -getlistArrayList: " + e.getMessage());
         }
         return null;
     }
@@ -66,25 +67,28 @@ public class CodigosGenerales {
                     bdConcepto.cCodigo = Codigo;
             }
         } catch (Exception e) {
-            Log.d("CodigosGenerales"," -SetCodigLisArticulos: "+ e.getMessage());
+            Log.d("CodigosGenerales", " -SetCodigLisArticulos: " + e.getMessage());
         }
     }
 
 
     public static ArrayList<List<String>> getListArticulos(String Nombre) {
         try {
-            switch (Tipo) {
-                case "Familia":
-                    return bdFamilia.getListaArticulos(Nombre);
-                case "SubFamilia":
-                    return bdSubFamilia.getListaArticulos(Nombre);
-                case "Concepto":
-                    return bdConcepto.getListaArticulos(Nombre);
-                case "Filtro":
-                    return arrayArticulosFiltrados;
+            if (Filtro) {
+                return arrayArticulosFiltrados;
+            } else {
+                switch (Tipo) {
+                    case "Familia":
+                        return bdFamilia.getListaArticulos(Nombre);
+                    case "SubFamilia":
+                        return bdSubFamilia.getListaArticulos(Nombre);
+                    case "Concepto":
+                        return bdConcepto.getListaArticulos(Nombre);
+                }
+
             }
         } catch (Exception e) {
-            Log.d("CodigosGenerales"," -getListArticulos: "+ e.getMessage());
+            Log.d("CodigosGenerales", " -getListArticulos: " + e.getMessage());
         }
         return null;
     }
@@ -95,7 +99,7 @@ public class CodigosGenerales {
                 case "Familia":
                     return bdFamilia.getArticuloSeleccionado(Cod_Articulo);
                 case "SubFamilia":
-                   return   bdSubFamilia.getArticuloSeleccionado(Cod_Articulo);
+                    return bdSubFamilia.getArticuloSeleccionado(Cod_Articulo);
                 case "Concepto":
                     return bdConcepto.getArticuloSeleccionado(Cod_Articulo);
             }
@@ -105,9 +109,5 @@ public class CodigosGenerales {
         return null;
     }
 
-    public static ArrayList getListFiltros() {
-
-        return null;
-    }
 
 }

@@ -80,7 +80,7 @@
                     android:orientation="vertical">
 
                     <Button
-                        android:id="@+id/button4"
+                        android:id="@+id/b_carrito"
                         android:layout_width="?android:attr/actionBarSize"
                         android:layout_height="wrap_content"
                         android:background="@drawable/car_color" />

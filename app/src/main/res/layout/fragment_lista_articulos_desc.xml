@@ -10,6 +10,12 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/tv_origen_popup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
@@ -179,21 +185,24 @@
                 />
 
             <EditText
+                android:id="@+id/et_cantidad"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/cantidad"
                 android:inputType="number"
                 android:padding="15dp"
-                android:textColorHint="@color/colorWhite"
+                android:textColor="@color/colorWhite"
+                android:textColorHint="@color/colorPrimaryDark"
                 android:textSize="12sp" />
 
             <ImageButton
+                android:id="@+id/ib_carritoPedidos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="15dp"
                 android:background="@color/colorBarra"
+                android:padding="15dp"
                 android:scaleType="centerInside"
-                android:src="@drawable/carrito_plus"/>
+                android:src="@drawable/carrito_plus" />
         </LinearLayout>
 
     </LinearLayout>

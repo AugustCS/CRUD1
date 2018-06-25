@@ -184,15 +184,7 @@ public class FragFiltros extends Fragment implements View.OnClickListener {
             Log.d("Concentps", e.getMessage());
 
         }
-    }
-
-    public void CambiarFragment(Fragment fragment) {
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.frag_contenedor, fragment);
-        transaction.commit();
-    }
-
-    @Override
+    }@Override
     public void onClick(View view) {
         switch (view.getId()) {
             case (R.id.b_borrar):
@@ -286,11 +278,12 @@ public class FragFiltros extends Fragment implements View.OnClickListener {
                         }
                         j++;
                     }
-                    CodigosGenerales.Tipo = "Filtro";
+                    CodigosGenerales.Filtro = true;
                     if (Filtrar) {
                         CodigosGenerales.arrayArticulosFiltrados = bdFiltros.getListaArticulos(Familia, SubFamilia, Concepto1, Concepto2, Concepto3, Concepto4, Concepto5, Concepto6, Concepto7);
-                        Fragment fragment = new FragListArticulos();
+                        Fragment fragment= new FragListArticulos();
                         CambiarFragment(fragment);
+
                     }
                 } catch (Exception e) {
                     Log.d("b_listo", e.getMessage());
@@ -312,6 +305,14 @@ public class FragFiltros extends Fragment implements View.OnClickListener {
             Log.d("getSupportActionBar", e.getMessage());
         }
         super.onDetach();
+    }
+
+
+    public void CambiarFragment(Fragment fragment) {
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.frag_contenedor, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
 }

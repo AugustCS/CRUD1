@@ -40,11 +40,11 @@ public class FragLista extends Fragment {
 
 
         View view = inflater.inflate(R.layout.fragment_lista, container, false);
-        lv_items=view.findViewById(R.id.lv_items);
-        et_bucar=view.findViewById(R.id.et_buscar);
-
-        arrayList= CodigosGenerales.getListaNombres("");
-        arrayAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1, arrayList);
+        lv_items = view.findViewById(R.id.lv_items);
+        et_bucar = view.findViewById(R.id.et_buscar);
+        CodigosGenerales.Filtro=false;
+        arrayList = CodigosGenerales.getListaNombres("");
+        arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, arrayList);
         lv_items.setAdapter(arrayAdapter);
 
         et_bucar.addTextChangedListener(new TextWatcher() {
@@ -65,11 +65,10 @@ public class FragLista extends Fragment {
         lv_items.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                CodigosGenerales.listArrayList=CodigosGenerales.getlistArrayList();
+                CodigosGenerales.listArrayList = CodigosGenerales.getlistArrayList();
                 CodigosGenerales.SetCodigLisArticulos(CodigosGenerales.listArrayList.get(position).get(1));
-                CodigosGenerales.nom_categoria=CodigosGenerales.listArrayList.get(position).get(2);
-                Fragment fragment;
-                fragment = new FragListArticulos();
+                CodigosGenerales.nom_categoria = CodigosGenerales.listArrayList.get(position).get(2);
+                Fragment fragment = new FragListArticulos();
                 CambiarFragment(fragment);
             }
         });
@@ -80,13 +79,13 @@ public class FragLista extends Fragment {
     }
 
 
-    private void getData(){
-        arrayList= CodigosGenerales.getListaNombres(et_bucar.getText().toString());
-        arrayAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1, arrayList);
+    private void getData() {
+        arrayList = CodigosGenerales.getListaNombres(et_bucar.getText().toString());
+        arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, arrayList);
         lv_items.setAdapter(arrayAdapter);
     }
 
-    public void CambiarFragment(Fragment fragment){
+    public void CambiarFragment(Fragment fragment) {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.frag_contenedor, fragment);
         transaction.addToBackStack(null);

@@ -45,6 +45,7 @@ public class FragListArticulos extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         activity = getActivity();
+        CodigosGenerales.Filtro = false;
         View view = inflater.inflate(R.layout.fragment_lista_articulos, container, false);
         layout_cointairner = view.findViewById(R.id.ly_contenedor);
         b_filtro = view.findViewById(R.id.b_filtro);

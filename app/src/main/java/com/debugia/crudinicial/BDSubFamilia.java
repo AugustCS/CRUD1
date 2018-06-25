@@ -94,6 +94,7 @@ public class BDSubFamilia {
 
             while (rs.next()) {
                 arrayArticuloSeleccionado.add(Arrays.asList(
+                        rs.getString("ccod_articulo"),
                         rs.getString("cnom_articulo"),
                         rs.getString("cunidad"),
                         rs.getString("cmonedav"),

@@ -124,7 +124,6 @@ public class BDFiltros {
                 }
             }
 
-            Log.d("SQL",sql );
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sql);
 
